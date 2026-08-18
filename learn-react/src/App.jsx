@@ -20,6 +20,7 @@ function App() {
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
+          <h1>Learn Mohamed React JS</h1>
         </div>
         <button
           type="button"
