@@ -43,12 +43,12 @@ function App() {
           </Side>
 
           <Side>
-            <h3 style={{ textAlign: "center", marginBottom: "2px" }}>2</h3>
+            <h3 style={{ textAlign: "center", marginBottom: "2px"}}>2</h3>
             <img src="../public/favicon.svg" alt="" />
           </Side>
 
           <Side>
-            <h3 style={{ textAlign: "center", marginBottom: "2px" }}>3</h3>
+            <h3 style={{ textAlign: "center", marginBottom: "2px"}}>3</h3>
             <h3>✨✨✨</h3>
             <img  src={reactLogo} alt="" />
           </Side>
