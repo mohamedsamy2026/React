@@ -41,23 +41,23 @@ function App() {
   });
   // Data Posts Start
 
-  
+
 
   // Data Aside start
   const dataAside = [
     {
       id: 1,
-      content: "1 ✨",
+      children: "1 ✨",
     },
     {
       id: 2,
       content: "2 ✨ ✨",
-      img: "../public/favicon.svg",
+      children: <img src="../public/favicon.svg" alt="" />,
     },
     {
       id: 3,
       content: "3 ✨✨✨",
-      img: reactLogo,
+      children: <img src={reactLogo} alt="" />,
     },
   ];
 
@@ -67,7 +67,7 @@ function App() {
         key={side.id}
         content={side.content}
         >
-          <img src={side.img}/>
+          {side.children}
 
         </Side>
     );
