@@ -138,3 +138,36 @@ label{
   font-weight: bold;
   margin-right: 10px;
 }
+
+.textarea{
+  background-color: white;
+  color: white;
+}
+h2,
+h4{
+  color: white;
+}
+
+.div {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 10px;         
+  width: fit-content;
+  margin: auto;
+  direction: rtl;
+}
+
+
+
+textarea{
+  background-color: white;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+}
+
