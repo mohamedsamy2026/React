@@ -107,3 +107,34 @@ h1 {
   margin: auto;
   margin-bottom: 10px;
 }
+
+
+input{
+  width: fit-content;
+  margin: auto;
+  padding: 15px;
+  padding-right: 50px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: black;
+  border-radius: 7px;
+  border: none;
+  background-color: white;
+  font-size: 20px;
+}
+
+input::placeholder{
+  font-size: 15px;
+}
+
+input:focus{
+  outline: none;
+}
+
+
+label{
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 10px;
+}
