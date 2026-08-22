@@ -5,6 +5,7 @@ import heroImg from "./assets/hero.png";
 import "./App.css";
 // import LearnCourseReact from "./LearnCourseReact"
 import Props from "./Props";
+import UseState from "./UseStaute";
 
 // const show = true;
 
@@ -54,7 +55,9 @@ function App() {
 
       {/* <PropsDefult /> */}
 
-      <ul>{taskList}</ul>
+      {/* <ul>{taskList}</ul> */}
+
+      <UseState/>
 
       <div className="ticks"></div>
       <section id="next-steps">

@@ -11,8 +11,8 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -54,7 +54,6 @@ body {
   margin: 0;
 }
 
-
 #root {
   width: 1126px;
   max-width: 100%;
@@ -66,8 +65,6 @@ body {
   flex-direction: column;
   box-sizing: border-box;
 }
-
-
 
 code,
 .counter {
@@ -82,4 +79,31 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+.btn {
+  background-color: green;
+  border: 0;
+  width: fit-content;
+  padding: 18px 30px;
+  border-radius: 7px;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin: 50px auto;
+}
+
+.btn:hover {
+  background-color: rgb(0, 99, 0);
+}
+
+h1 {
+  color: white;
+  padding: 18px 30px;
+  border: 2px solid teal;
+  border-radius: 10px;
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 10px;
 }
