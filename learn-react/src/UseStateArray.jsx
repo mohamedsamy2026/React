@@ -31,16 +31,35 @@ export default function StateArray() {
         >
           Delete
         </button>
+        <button
+          onClick={() => {
+            editItem(mobil.id);
+          }}
+        >
+          Edit
+        </button>
       </li>
     );
   });
 
-  function deleteItem(id){
-     const newData = mobile.filter((device) =>{
-        return device.id != id
-      })
-      setMobile(newData)
+  function deleteItem(id) {
+    const newData = mobile.filter((device) => {
+      return device.id != id;
+    });
+    setMobile(newData);
   }
+
+  function editItem(id) {
+    let newData = mobile.map((device) => {
+      if (device.id == id) {
+        return { ...device, type: device.type + " Edit" };
+      } else {
+        return device;
+      }
+    });
+    setMobile(newData);
+  }
+
   return (
     <>
       <ul>{mobilesList}</ul>
