@@ -7,6 +7,8 @@ export default function UseState() {
     age: "",
     message: "",
     checked: false,
+    country: "مصر",
+    status: "",
   });
 
   function message(event) {
@@ -17,7 +19,7 @@ export default function UseState() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(formInputs.Name, formInputs.email, formInputs.age);
+          console.log(formInputs);
         }}
       >
         <div>
@@ -72,10 +74,52 @@ export default function UseState() {
             className="check"
             checked={formInputs.checked}
             onChange={(event) => {
-              setformInputs({...formInputs,checked:event.target.checked})
+              setformInputs({ ...formInputs, checked: event.target.checked });
             }}
           />
           <h4>هل انت فوق السن 17</h4>
+        </div>
+
+        <div>
+          <select
+            value={formInputs.country}
+            onChange={(event) => {
+              setformInputs({ ...formInputs, country: event.target.value });
+            }}
+          >
+            <option>مصر</option>
+            <option>السعوديه</option>
+            <option>العراق</option>
+            <option>الامارات</option>
+          </select>
+        </div>
+
+        <div className="inputs-radio">
+          <div>
+            <input
+              type="radio"
+              className="input"
+              value="Student"
+              checked={formInputs.status == "Student"}
+              onChange={(event) => {
+                setformInputs({ ...formInputs, status: event.target.value });
+              }}
+            />
+            <h4>Student</h4>
+          </div>
+
+          <div>
+            <input
+              type="radio"
+              className="input"
+              value="Teacher"
+              checked={formInputs.status == "Teacher"}
+              onChange={(event) => {
+                setformInputs({ ...formInputs, status: event.target.value });
+              }}
+            />
+            <h4>Teacher</h4>
+          </div>
         </div>
 
         <button className="btn">Submit</button>

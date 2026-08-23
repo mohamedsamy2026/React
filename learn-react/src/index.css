@@ -171,3 +171,16 @@ textarea{
   padding: 10px;
 }
 
+.inputs-radio{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.inputs-radio div{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
