@@ -1,29 +1,55 @@
 import { useState } from "react";
 
-export default function StateArray() {
+let next = 4;
 
+export default function StateArray() {
   const [inputValue, setInputValue] = useState("");
 
-  const [mobile, setMobile] = useState(["Ipone", "Oppo", "Vivo"]);
+  const [mobile, setMobile] = useState([
+    { id: 1, type: "Ipone" },
+    { id: 2, type: "Oppo" },
+    { id: 3, type: "Vivo" },
+  ]);
 
   function inputFunction(event) {
     setInputValue(event.target.value);
   }
 
   function mobileFunction() {
-    setMobile([...mobile,inputValue]);
+    setMobile([...mobile, { id: next, type: inputValue }]);
+    next++;
   }
 
-  const mobilesList = mobile.map((mobil, index) => {
-    return <li key={index} >{mobil}</li>;
+  const mobilesList = mobile.map((mobil) => {
+    return (
+      <li key={mobil.id}>
+        {mobil.type}
+        <button
+          onClick={() => {
+            deleteItem(mobil.id);
+          }}
+        >
+          Delete
+        </button>
+      </li>
+    );
   });
+
+  function deleteItem(id){
+     const newData = mobile.filter((device) =>{
+        return device.id != id
+      })
+      setMobile(newData)
+  }
   return (
     <>
       <ul>{mobilesList}</ul>
 
       <input onChange={inputFunction} value={inputValue} type="text" />
 
-      <button value={mobile} onClick={mobileFunction}>Add</button>
+      <button value={mobile.type} onClick={mobileFunction}>
+        Add
+      </button>
     </>
   );
 }
