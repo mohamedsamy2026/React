@@ -57,7 +57,7 @@ function App() {
 
       {/* <ul>{taskList}</ul> */}
 
-      <UseState/>
+      {/* <UseState/> */}
 
       <div className="ticks"></div>
       <section id="next-steps">
