@@ -1,0 +1,12 @@
+.father {
+  background-color: rgb(38, 4, 70);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100ch;
+  text-align: center;
+}
+
+
+.title{
+    margin-bottom: 30px;
+}
