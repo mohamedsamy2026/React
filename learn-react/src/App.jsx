@@ -31,9 +31,20 @@ function App() {
     );
   });
 
+
+  function countPlus(){
+      setCount(count + 1)
+      setCount((count) => {
+          return count + 1
+      })
+  }
+
   return (
     <>
-      
+       <h1>The Count IS [{count}]</h1> 
+       <div className="btn" onClick={countPlus}>
+       <button>Click Button</button>
+       </div>
 
       {/* <PropsDefult /> */}
 
@@ -41,7 +52,7 @@ function App() {
 
       {/* <UseState/> */}
 
-      <UseStateArray/>
+      {/* <UseStateArray/> */}
 
     
     </>
