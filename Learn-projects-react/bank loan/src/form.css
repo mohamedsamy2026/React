@@ -1,50 +1,57 @@
-form div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 40px;
-    border-bottom:2px solid blueviolet;
-    padding-bottom: 40px;
+form div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+  border-bottom: 2px solid blueviolet;
+  padding-bottom: 40px;
 }
 
-form div label{
-    font-weight: bold;
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: -30px;
+form div label {
+  font-weight: bold;
+  font-size: 25px;
+  margin-top: 40px;
+  margin-bottom: -27px;
 }
 
-form div input{
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    font-size: 18px;
-    font-weight: bold;
+form div input,
+select {
+  width: 100%;
+  padding: 15px;
+  border-radius: 8px;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-button{
-    margin-top: 20px;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    background-color: gray;
-    padding: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    cursor:pointer;
+select,
+select option {
+  color: black;
+  font-size: 23px;
 }
 
-button:hover{
-    background-color: rgb(81, 78, 78);
+button {
+  margin-top: 20px;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  background-color: gray;
+  padding: 20px 40px;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(81, 78, 78);
 }
 
 .big-checkbox {
   width: 20px;
   height: 20px;
   transform: scale(2);
-    margin: 10px; 
+  margin: 10px;
   cursor: pointer;
 }
