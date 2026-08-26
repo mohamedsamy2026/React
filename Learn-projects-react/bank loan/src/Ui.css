@@ -2,11 +2,27 @@
   background-color: rgb(38, 4, 70);
   padding: 2rem;
   border-radius: 10px;
-  width: 100ch;
   text-align: center;
+  width: 100ch;
 }
 
+@media (max-width: 900px) {
+  .father {
+    width: 70ch;
+  }
+}
 
-.title{
-    margin-bottom: 30px;
+@media (max-width: 640px) {
+  .father {
+    width: 50ch;
+  }
+}
+@media (max-width: 470px) {
+  .father {
+    width: 100%;
+  }
+}
+
+.title {
+  margin-bottom: 30px;
 }

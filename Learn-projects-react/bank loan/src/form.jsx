@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputVailed from "./formInput";
+import Error from "./ErrorMessage";
 import "./form.css";
 
 export default function RequestInput() {
@@ -10,18 +11,25 @@ export default function RequestInput() {
     employes: false,
     salary: "Less Than 500$",
   });
+
+  const [showError, setShowError] = useState(false);
+
+  function submit(e) {
+    e.preventDefault();
+    if (inputs.name == "") {
+      <Error error="Please Enter The Name" />;
+      setShowError(true);
+    }
+     
+  }
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
-    >
+    <form onSubmit={submit}>
       <InputVailed
         label="Name:"
         type="text"
         value={inputs.name}
         onChange={(event) => setInputs({ ...inputs, name: event.target.value })}
-        required={true}
       />
 
       <InputVailed
@@ -31,7 +39,6 @@ export default function RequestInput() {
         onChange={(event) =>
           setInputs({ ...inputs, phone: event.target.value })
         }
-        required={true}
       />
 
       <InputVailed
@@ -39,7 +46,6 @@ export default function RequestInput() {
         type="text"
         value={inputs.age}
         onChange={(event) => setInputs({ ...inputs, age: event.target.value })}
-        required={true}
       />
 
       <div>
@@ -50,7 +56,6 @@ export default function RequestInput() {
           onChange={(event) =>
             setInputs({ ...inputs, employes: event.target.checked })
           }
-          required
           className="big-checkbox"
         />
       </div>
@@ -68,7 +73,13 @@ export default function RequestInput() {
           <option>abave2000$</option>
         </select>
       </div>
-
+      {showError ? (
+        <Error
+          onClose={() => {
+            setShowError(false);
+          }}
+        />
+      ) : null}
       <button>Submit</button>
     </form>
   );
