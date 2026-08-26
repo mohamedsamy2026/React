@@ -12,6 +12,14 @@ export default function RequestInput() {
     salary: "Less Than 500$",
   });
 
+  let isTrue =
+    inputs.name !== "" &&
+    inputs.age >= 17 &&
+    inputs.age < 80 &&
+    inputs.phone.length == 11
+      ? "blueviolet"
+      : "gray";
+
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -94,7 +102,7 @@ export default function RequestInput() {
           error={errorMessage}
         />
       ) : null}
-      <button>Submit</button>
+      <button style={{ background: isTrue }}>Submit</button>
     </form>
   );
 }
