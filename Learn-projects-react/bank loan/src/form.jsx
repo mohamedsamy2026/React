@@ -13,14 +13,26 @@ export default function RequestInput() {
   });
 
   const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function submit(e) {
     e.preventDefault();
     if (inputs.name == "") {
-      <Error error="Please Enter The Name" />;
+      setErrorMessage("Please Enter The Name");
       setShowError(true);
+      return;
+    } else if (inputs.phone.length < 11 || inputs.phone.length > 11) {
+      setErrorMessage("Please Enter a Valid Phone Number (Must be 11 digits)");
+      setShowError(true);
+      return;
+    } else if (inputs.age < 17 || inputs.age > 80) {
+      setErrorMessage("Please Enter a Valid Age Range!");
+      setShowError(true);
+      return;
     }
-     
+
+    setErrorMessage("Form Submitted Successfully");
+    setShowError(true);
   }
 
   return (
@@ -46,6 +58,7 @@ export default function RequestInput() {
         type="text"
         value={inputs.age}
         onChange={(event) => setInputs({ ...inputs, age: event.target.value })}
+        required={true}
       />
 
       <div>
@@ -78,6 +91,7 @@ export default function RequestInput() {
           onClose={() => {
             setShowError(false);
           }}
+          error={errorMessage}
         />
       ) : null}
       <button>Submit</button>
