@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputVailed from "./formInput";
 import Error from "./ErrorMessage";
 import "./form.css";
+import { FormInputsContext } from "./context/Inputscontext";
 
 export default function RequestInput() {
   const [inputs, setInputs] = useState({
@@ -55,12 +56,17 @@ export default function RequestInput() {
 
   return (
     <form onSubmit={submit}>
-      <InputVailed
-        label="Name:"
-        type="text"
-        value={inputs.name}
-        handleChange={OnChangeName}
-      />
+      
+      <FormInputsContext.provider
+        value={{
+          label: "Name",
+          type: "text",
+          value: inputs.name,
+          handleChange: OnChangeName,
+        }}
+      >
+        <InputVailed />
+      </FormInputsContext.provider>
 
       <InputVailed
         label="Phone:"
