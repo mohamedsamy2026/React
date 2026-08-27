@@ -2,8 +2,8 @@ export default function InputVailed({
   label,
   type,
   value,
-  onChange,
   required,
+  handleChange
 }) {
   return (
     <div>
@@ -11,7 +11,9 @@ export default function InputVailed({
       <input
         type={type}
         value={value}
-        onChange={onChange}
+        onChange={(event) => {
+          (event.tahandleChangerget.value)
+        }}
         required={required}
       />
     </div>

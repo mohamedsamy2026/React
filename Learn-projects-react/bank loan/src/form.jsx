@@ -43,29 +43,37 @@ export default function RequestInput() {
     setShowError(true);
   }
 
+  function OnChangeName(value) {
+    setInputs({ ...inputs, name: value });
+  }
+  function OnChangePhone(value) {
+    setInputs({ ...inputs, phone: value });
+  }
+  function OnChangeAge(value) {
+    setInputs({ ...inputs, age: value });
+  }
+
   return (
     <form onSubmit={submit}>
       <InputVailed
         label="Name:"
         type="text"
         value={inputs.name}
-        onChange={(event) => setInputs({ ...inputs, name: event.target.value })}
+        handleChange={OnChangeName}
       />
 
       <InputVailed
         label="Phone:"
         type="number"
         value={inputs.phone}
-        onChange={(event) =>
-          setInputs({ ...inputs, phone: event.target.value })
-        }
+        handleChange={OnChangePhone}
       />
 
       <InputVailed
         label="Age:"
         type="text"
         value={inputs.age}
-        onChange={(event) => setInputs({ ...inputs, age: event.target.value })}
+        handleChange={OnChangeAge}
         required={true}
       />
 
