@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputVailed from "./formInput";
 import Error from "./ErrorMessage";
 import "./form.css";
+
 import { FormInputsContext } from "./context/Inputscontext";
 
 export default function RequestInput() {
@@ -56,8 +57,7 @@ export default function RequestInput() {
 
   return (
     <form onSubmit={submit}>
-      
-      <FormInputsContext.provider
+      <FormInputsContext.Provider
         value={{
           label: "Name",
           type: "text",
@@ -66,22 +66,29 @@ export default function RequestInput() {
         }}
       >
         <InputVailed />
-      </FormInputsContext.provider>
+      </FormInputsContext.Provider>
 
-      <InputVailed
-        label="Phone:"
-        type="number"
-        value={inputs.phone}
-        handleChange={OnChangePhone}
-      />
+      <FormInputsContext.Provider
+        value={{
+          label: "Phone",
+          type: "number",
+          value: inputs.phone,
+          handleChange: OnChangePhone,
+        }}
+      >
+        <InputVailed />
+      </FormInputsContext.Provider>
 
-      <InputVailed
-        label="Age:"
-        type="text"
-        value={inputs.age}
-        handleChange={OnChangeAge}
-        required={true}
-      />
+      <FormInputsContext.Provider
+        value={{
+          label: "Age",
+          type: "number",
+          value: inputs.age,
+          handleChange: OnChangeAge,
+        }}
+      >
+        <InputVailed />
+      </FormInputsContext.Provider>
 
       <div>
         <label>Are You An Employee?</label>
