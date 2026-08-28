@@ -28,9 +28,11 @@ function List({ imageSize }) {
     <li key={place.id}>
       <Place place={place} imageSize={imageSize} />
     </li>
+    
   ));
   return <ul>{listItems}</ul>;
 }
+
 
 function Place({ place, imageSize }) {
   return (
@@ -48,7 +50,6 @@ function PlaceImage({ place, imageSize }) {
   return (
     <img
       src={getImageUrl(place)}
-      alt={place.name}
       width={imageSize}
       height={imageSize}
     />
