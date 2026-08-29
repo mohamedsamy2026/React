@@ -14,7 +14,20 @@ import { postsContext } from "./conText/ConText";
 
 import Materail from "./Material";
 
+//  Themes
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { purple } from "@mui/material/colors";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: "#01579b",
+    },
+  },
+});
 
 function App() {
   // let postsAll = [
@@ -84,7 +97,9 @@ function App() {
     // </postsContext.Provider>
 
     <>
-        <Materail/>
+      <ThemeProvider theme={theme}>
+        <Materail />
+      </ThemeProvider>
     </>
   );
 }
