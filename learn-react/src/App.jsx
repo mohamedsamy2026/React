@@ -12,7 +12,7 @@ import FatherPost from "./FatherPosts";
 // Context
 import { postsContext } from "./conText/ConText";
 
-
+import Materail from "./Material";
 
 
 
@@ -84,7 +84,7 @@ function App() {
     // </postsContext.Provider>
 
     <>
-
+        <Materail/>
     </>
   );
 }
