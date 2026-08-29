@@ -41,6 +41,12 @@ export default function posts() {
         }}
       >
         {postsList}
+        <Link to="/posts/newPost">
+          <button>New Post</button>
+        </Link>
+        <Link to="/posts/DeletePost">
+          <button>Delete Post</button>
+        </Link>
       </div>
     </>
   );

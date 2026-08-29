@@ -9,6 +9,7 @@ import PostDetails from "./PostDetails";
 import NotFound from "./NotFound";
 import DeletePost from "./DeletPost";
 import NewPost from "./NewPost";
+import FatherPost from "./FatherPosts";
 
 // Context
 import { postsContext } from "./conText/ConText";
@@ -39,14 +40,12 @@ function App() {
       <>
         <h1>Hello</h1>
         <ul style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
-
           <Link to="/home">
             <button style={{ fontSize: "25px" }}>Home</button>
           </Link>
 
           <Link to="/about">
-            <button sty
-            le={{ fontSize: "25px" }}>About</button>
+            <button style={{ fontSize: "25px" }}>About</button>
           </Link>
           <Link to="/posts">
             <button style={{ fontSize: "25px" }}>Posts</button>
@@ -59,11 +58,10 @@ function App() {
           <Link to="/posts/DeletePost">
             <button style={{ fontSize: "25px" }}>Delet Post</button>
           </Link>
-          
         </ul>
 
         <Routes>
-          <Route path="/posts">
+          <Route path="/posts" element={<FatherPost/>}>
             <Route index element={<Posts />} />
             <Route path=":postId" element={<PostDetails />} />
             <Route path="DeletePost" element={<DeletePost />} />
