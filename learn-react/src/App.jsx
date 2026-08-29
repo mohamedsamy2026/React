@@ -100,6 +100,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <Materail />
       </ThemeProvider>
+
+      <h2 className="text-primary  text-center font-bold text-2xl">Mohamed</h2>
     </>
   );
 }

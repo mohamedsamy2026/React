@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { postsContext } from "./conText/ConText";
 
-
 export default function posts() {
-  const postsAll = useContext(postsContext)
+  const postsAll = useContext(postsContext);
   let postsList = postsAll.map((post) => {
     return (
       <Link key={post.id} to={`/posts/${post.id}`}>

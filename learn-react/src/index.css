@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* * {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+} */
+
+@theme {
+  --color-primary: #218dae;
+}
