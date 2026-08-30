@@ -9,15 +9,18 @@ import NotFound from "./NotFound";
 import DeletePost from "./DeletPost";
 import NewPost from "./NewPost";
 import FatherPost from "./FatherPosts";
+import FontAsome from "./FontAsome"
 // Context
 import { postsContext } from "./conText/ConText";
 
 import Materail from "./Material";
-import Grid from "./Grid";
+// import Grid from "./Grid";
 
 //  Themes
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { purple, green } from "@mui/material/colors";
+
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const theme = createTheme({
   palette: {
@@ -98,11 +101,15 @@ function App() {
     // </postsContext.Provider>
 
     <>
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}>
         <Materail />
-      </ThemeProvider>
+      </ThemeProvider> */}
 
       {/* <Grid /> */}
+      <div className="w-12 h-12 bg-red-200 hover:bg-red-300 rounded-full flex items-center justify-center cursor-pointer duration-200 mx-auto mt-100">
+        <DeleteIcon style={{ fontSize: "30px" }} className="text-red-500" />
+      </div>
+      <FontAsome/>
     </>
   );
 }
