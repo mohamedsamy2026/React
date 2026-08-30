@@ -1,13 +1,41 @@
 // Imports
+import * as React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Box from "@mui/material/Box";
+import Switch from "@mui/material/Switch";
+import Paper from "@mui/material/Paper";
+import Collapse from "@mui/material/Collapse";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
+const icon = (
+  <Paper sx={{ m: 1, width: 100, height: 100 }} elevation={4}>
+    <svg width="100" height="100">
+      <Box
+        component="polygon"
+        points="0,100 50,00, 100,100"
+        sx={(theme) => ({
+          fill: theme.palette.common.white,
+          stroke: theme.palette.divider,
+          strokeWidth: 1,
+        })}
+      />
+    </svg>
+  </Paper>
+);
 
 export default function FaqAccordion() {
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
+
   return (
-    <div className="max-w-xl mx-auto mt-10">
+    <div className="max-w-xl mx-auto mt-10 bg-blue-400 p-2 rounded-xl">
       {/* العنصر الأول */}
       <Accordion>
         <AccordionSummary
@@ -34,10 +62,14 @@ export default function FaqAccordion() {
         >
           <Typography component="span">Accordion 2 (السؤال الثاني)</Typography>
         </AccordionSummary>
+        
         <AccordionDetails>
           <Typography>
-            هنا المحتوى الخاص بالسؤال الثاني، يقفل ويفتح بكل انسيابية لوحده من
-            غير ما تكتب كود جافاسكريبت للتحكم في الـ State!
+            <Box sx={{ height: 50, textAlign: "center" }}>
+              <FormControlLabel
+                control={<Switch checked={checked} onChange={handleChange} />}
+              />
+            </Box>
           </Typography>
         </AccordionDetails>
       </Accordion>
