@@ -13,10 +13,11 @@ import FatherPost from "./FatherPosts";
 import { postsContext } from "./conText/ConText";
 
 import Materail from "./Material";
+import Grid from "./Grid";
 
 //  Themes
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { purple,green } from "@mui/material/colors";
+import { purple, green } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
@@ -101,7 +102,7 @@ function App() {
         <Materail />
       </ThemeProvider>
 
-      <h2 className="text-primary  text-center font-bold text-2xl">Mohamed</h2>
+      {/* <Grid /> */}
     </>
   );
 }
