@@ -8,7 +8,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Switch from "@mui/material/Switch";
 import Paper from "@mui/material/Paper";
-import Collapse from "@mui/material/Collapse";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 const icon = (
@@ -35,7 +34,7 @@ export default function FaqAccordion() {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-blue-400 p-2 rounded-xl">
+    <div className="max-w-xl mx-auto mt-10 p-2 rounded-xl">
       {/* العنصر الأول */}
       <Accordion>
         <AccordionSummary
@@ -62,7 +61,6 @@ export default function FaqAccordion() {
         >
           <Typography component="span">Accordion 2 (السؤال الثاني)</Typography>
         </AccordionSummary>
-        
         <AccordionDetails>
           <Typography>
             <Box sx={{ height: 50, textAlign: "center" }}>
@@ -73,6 +71,14 @@ export default function FaqAccordion() {
           </Typography>
         </AccordionDetails>
       </Accordion>
+      <div className="bg-orange-400 text-white rounded-sm cursor-pointer">
+        <h2
+          className="text-center font-bold text-xl duration-300"
+          style={{ height: checked ? "200px" : "100px" }}
+        >
+          Hello
+        </h2>
+      </div>
     </div>
   );
 }
