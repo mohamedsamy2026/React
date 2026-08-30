@@ -1,7 +1,10 @@
-import "./App.css";
-
+import Expand from "./Expand";
 function App() {
-  return <></>;
+  return (
+    <>
+      <Expand />
+    </>
+  );
 }
 
 export default App;
