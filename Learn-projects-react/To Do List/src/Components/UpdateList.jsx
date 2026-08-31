@@ -1,7 +1,7 @@
 export default function UpdateList() {
   return (
     <>
-      <div className="w-screen h-screen bg-[#000000a0] absolute inset-0 opacity-0 hidden z-10 duration-300">
+      <div className="w-screen h-screen bg-[#000000a0] absolute inset-0 invisible z-10 duration-300">
         <div className="absolute top-[50%] left-[50%] transform -translate-y-[50%] -translate-x-[50%] bg-white w-[50%] h-auto rounded-sm">
           <h2 className="font-header font-extrabold text-3xl text-right text-gray-600 pe-6 py-4">
             تعديل المهمه

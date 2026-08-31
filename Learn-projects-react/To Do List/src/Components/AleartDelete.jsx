@@ -1,7 +1,7 @@
 export default function AleartDelete() {
   return (
     <>
-      <div className="w-screen h-screen bg-[#000000a0] absolute inset-0 opacity-0 hidden z-10duration-300">
+      <div className="w-screen h-screen bg-[#000000a0] absolute inset-0 invisible z-10 duration-300">
         <div
           className="absolute top-[50%] left-[50%] transform -translate-y-[50%] -translate-x-[50%] bg-white w-[35%]
         h-auto rounded-sm"
