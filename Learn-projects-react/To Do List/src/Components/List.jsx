@@ -1,6 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
-import UpdateIcon from "@mui/icons-material/UpdateSharp";
-import AcUnitOutlined from "@mui/icons-material/AccessAlarm";
+import EditIcon from '@mui/icons-material/Edit';
+import CheckIcon from '@mui/icons-material/Check';
 
 export default function List({ title, body }) {
   return (
@@ -10,11 +10,11 @@ export default function List({ title, body }) {
           className="deleteIcon text-red-500 bg-white border-2 border-red-500 p-[5px] flex justify-center items-center rounded-full cursor-pointer hover:bg-red-600 hover:text-white"
           style={{ fontSize: "43px" }}
         />
-        <UpdateIcon
+        <EditIcon
           className="deleteIcon text-blue-500 bg-white border-2 border-blue-500 p-[5px] flex justify-center items-center rounded-full cursor-pointer hover:bg-blue-600 hover:text-white"
           style={{ fontSize: "43px" }}
         />
-        <AcUnitOutlined
+        <CheckIcon
           className="deleteIcon text-green-500 bg-white border-2 border-green-500 p-[5px] flex justify-center items-center rounded-full cursor-pointer hover:bg-green-600 hover:text-white"
           style={{ fontSize: "43px" }}
         />
