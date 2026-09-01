@@ -1,33 +1,21 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import { useContext } from "react";
+import { checkContext } from "../Context/context";
 
 // Components
 import Header from "./Header";
 import List from "./List";
 import AleartSucess from "./AleartSucess";
 import UpdateList from "./UpdateList";
-import AleartDelete from "./AleartDelete";
-
-const todos = [];
 
 export default function ToDoList() {
+  const { list, setList } = useContext(checkContext);
   const [inputValue, setInputValue] = useState("");
-  const [list, setList] = useState(todos);
-
-  function handleCompleted(id) {
-    const updatecompleted = list.map((t) => {
-      if (id === t.id) {
-        return { ...t, completed: !t.completed };
-      }
-      return t;
-    });
-
-    setList(updatecompleted);
-  }
 
   let ListRead = list.map((oneList) => {
     return (
-      <List key={oneList.id} todo={oneList} handleCompleted={handleCompleted} />
+      <List key={oneList.id} todo={oneList} />
     );
   });
 
@@ -73,7 +61,8 @@ export default function ToDoList() {
 
       <UpdateList />
 
-      <AleartDelete />
+      
+
     </div>
   );
 }
