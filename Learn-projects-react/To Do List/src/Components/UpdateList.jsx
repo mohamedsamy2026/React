@@ -13,7 +13,7 @@ export default function UpdateList() {
             <input
               className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
               type="text"
-              value="قرأه كتاب 1"
+              // value="قرأه كتاب 1"
             />
 
             <label className="block text-left ps-6 font-bold text-lg text-gray-600 mt-4">
@@ -22,7 +22,7 @@ export default function UpdateList() {
             <input
               className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
               type="text"
-              value="انجازه في شهر 1"
+              // value="انجازه في شهر 1"
             />
           </div>
           <div className="space-x-4 text-white font-extrabold text-xl mt-10 mb-8 w-full text-left ps-6">
