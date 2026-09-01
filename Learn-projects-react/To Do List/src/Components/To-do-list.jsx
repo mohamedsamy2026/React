@@ -14,9 +14,20 @@ export default function ToDoList() {
   const [inputValue, setInputValue] = useState("");
   const [list, setList] = useState(todos);
 
+  function handleCompleted(id) {
+    const updatecompleted = list.map((t) => {
+      if (id === t.id) {
+        return { ...t, completed: !t.completed };
+      }
+      return t;
+    });
+
+    setList(updatecompleted);
+  }
+
   let ListRead = list.map((oneList) => {
     return (
-      <List key={oneList.id} title={oneList.title} details={oneList.details} />
+      <List key={oneList.id} todo={oneList} handleCompleted={handleCompleted} />
     );
   });
 
@@ -49,7 +60,7 @@ export default function ToDoList() {
         <input
           value={inputValue}
           onChange={(event) => {
-            setInputValue(event.target.value)
+            setInputValue(event.target.value);
           }}
           className="w-[75%] border-[1.8px] border-gray-400 py-[14px] px-2 ms-2 rounded-sm outline-0 font-bold text-lg hover:border-gray-600 duration-300"
           type="text"

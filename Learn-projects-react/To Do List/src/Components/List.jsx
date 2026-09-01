@@ -1,8 +1,13 @@
+// Icons
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 
-export default function List({ title, details }) {
+export default function List({ todo, handleCompleted }) {
+  function handleComplete() {
+    handleCompleted(todo.id);
+  }
+
   return (
     <div className="flex justify-between items-center bg-blue-950 text-white hover:h-37 duration-200 px-4 h-28 rounded-[5px] cursor-pointer mb-10 hover:shadow-xl hover:shadow-black/40">
       <div className="space-x-7 flex items-center">
@@ -23,17 +28,20 @@ export default function List({ title, details }) {
         </button>
 
         {/* زرار التأكيد */}
-        <button className="bg-white border-2 border-green-500 p-1 rounded-full cursor-pointer hover:bg-green-600 transition-colors group">
+        <button
+          onClick={handleComplete}
+          className={` border-2  p-1 rounded-full cursor-pointer hover:border-white hover:bg-green-600 transition-colors group ${todo.completed ? "bg-green-500 border-white" : "bg-white border-green-500"}`}
+        >
           <CheckIcon
-            className="text-green-500 group-hover:text-white"
+            className={`group-hover:text-white ${todo.completed ? "text-white" : "text-green-500"}`}
             style={{ fontSize: "35px" }}
           />
         </button>
       </div>
 
       <div className="space-y-3">
-        <h2 className="text-right text-3xl font-extrabold">{title}</h2>
-        <p className="font-medium text-lg text-gray-100">{details}</p>
+        <h2 className="text-right text-3xl font-extrabold">{todo.title}</h2>
+        <p className="font-medium text-lg text-gray-100">{todo.details}</p>
       </div>
     </div>
   );
