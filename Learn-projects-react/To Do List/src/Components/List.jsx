@@ -2,7 +2,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 
-export default function List({ title, body }) {
+export default function List({ title, details }) {
   return (
     <div className="flex justify-between items-center bg-blue-950 text-white hover:h-37 duration-200 px-4 h-28 rounded-[5px] cursor-pointer mb-10 hover:shadow-xl hover:shadow-black/40">
       <div className="space-x-7 flex items-center">
@@ -33,7 +33,7 @@ export default function List({ title, body }) {
 
       <div className="space-y-3">
         <h2 className="text-right text-3xl font-extrabold">{title}</h2>
-        <p className="font-medium text-lg text-gray-100">{body}</p>
+        <p className="font-medium text-lg text-gray-100">{details}</p>
       </div>
     </div>
   );
