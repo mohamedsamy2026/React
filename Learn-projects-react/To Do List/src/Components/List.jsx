@@ -10,8 +10,14 @@ import { useState } from "react";
 
 export default function List({ todo }) {
   const { list, setList } = useContext(checkContext);
+
   const [deleteModule, setdeleteModule] = useState(false);
+
   const [updateModule, setupdateModule] = useState(false);
+  const [updateTodo, setUpdateTodo] = useState({
+    title: todo.title,
+    details: todo.details,
+  });
 
   function handleComplete() {
     const updatecompleted = list.map((t) => {
@@ -44,17 +50,27 @@ export default function List({ todo }) {
   // Functions Deleting Todo End
 
   // Functions Update Todo Start
-  function updateTodo() {
+  function updateTodo1() {
     setupdateModule(true);
   }
 
-  function NoUpdateTodo() {
+  function NoUpdate1() {
     setupdateModule(false);
   }
-  // Functions Update Todo End
 
-  // Functions Check Todo Start
-  // Functions Check Todo End
+  function confirmUpdate() {
+    const updatetodoonely = list.map((t) => {
+      if (t.id == todo.id) {
+        return { ...t, title: updateTodo.title, details: updateTodo.details };
+      }
+      return t;
+    });
+
+    setList(updatetodoonely);
+    setupdateModule(false);
+  }
+
+  // Functions Update Todo End
 
   // Functions End
 
@@ -76,7 +92,7 @@ export default function List({ todo }) {
 
           {/* زرار التعديل */}
           <button
-            onClick={updateTodo}
+            onClick={updateTodo1}
             className="bg-white border-2 border-blue-500 p-1 rounded-full cursor-pointer hover:bg-blue-600 transition-colors group"
           >
             <EditIcon
@@ -149,31 +165,35 @@ export default function List({ todo }) {
               العنوان
             </label>
             <input
-              value={todo.title}
+              value={updateTodo.title}
               onChange={(event) => {
-                setList([event.target.value]);
+                setUpdateTodo({ ...updateTodo, title: event.target.value });
               }}
               className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
               type="text"
-              // value="قرأه كتاب 1"
             />
 
             <label className="block text-left ps-6 font-bold text-lg text-gray-600 mt-4">
               التفاصيل
             </label>
             <input
-              value={todo.details}
+              value={updateTodo.details}
+              onChange={(event) => {
+                setUpdateTodo({ ...updateTodo, details: event.target.value });
+              }}
               className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
               type="text"
-              // value="انجازه في شهر 1"
             />
           </div>
           <div className="space-x-4 text-white font-extrabold text-xl mt-10 mb-8 w-full text-left ps-6">
-            <button className="cursor-pointer bg-green-600 duration-300 py-[12px] px-5 rounded-sm hover:bg-green-500">
+            <button
+              onClick={confirmUpdate}
+              className="cursor-pointer bg-green-600 duration-300 py-[12px] px-5 rounded-sm hover:bg-green-500"
+            >
               حفظ التعديلات
             </button>
             <button
-              onClick={NoUpdateTodo}
+              onClick={NoUpdate1}
               className="cursor-pointer bg-red-600 duration-300 py-[12px] px-5 rounded-sm hover:bg-red-800"
             >
               إلغاء
