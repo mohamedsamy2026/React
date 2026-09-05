@@ -39,6 +39,8 @@ export default function List({ todo }) {
 
   return (
     <>
+    
+      {/* Icons Start */}
       <div className="flex justify-between items-center bg-blue-950 text-white hover:h-37 duration-200 px-4 h-28 rounded-[5px] cursor-pointer mb-10 hover:shadow-xl hover:shadow-black/40">
         <div className="space-x-7 flex items-center">
           {/* زرار الحذف */}
@@ -77,7 +79,9 @@ export default function List({ todo }) {
           <p className="font-medium text-lg text-gray-100">{todo.details}</p>
         </div>
       </div>
+      {/* Icons End */}
 
+      {/*  Aleart DeleteConfirm Start */}
       <div
         className={`w-screen h-screen bg-[#000000a0] absolute inset-0 ${deleteModule ? "block" : "hidden"} duration-300`}
       >
@@ -107,6 +111,7 @@ export default function List({ todo }) {
           </div>
         </div>
       </div>
+      {/*  Aleart DeleteConfirm End */}
     </>
   );
 }
