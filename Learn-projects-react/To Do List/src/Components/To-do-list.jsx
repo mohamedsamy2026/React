@@ -7,7 +7,6 @@ import { checkContext } from "../Context/context";
 import Header from "./Header";
 import List from "./List";
 import AleartSucess from "./AleartSucess";
-import UpdateList from "./UpdateList";
 
 export default function ToDoList() {
   const { list, setList } = useContext(checkContext);
@@ -59,7 +58,6 @@ export default function ToDoList() {
 
       <AleartSucess />
 
-      <UpdateList />
 
       
 

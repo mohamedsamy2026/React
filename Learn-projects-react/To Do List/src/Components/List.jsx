@@ -11,6 +11,7 @@ import { useState } from "react";
 export default function List({ todo }) {
   const { list, setList } = useContext(checkContext);
   const [deleteModule, setdeleteModule] = useState(false);
+  const [updateModule, setupdateModule] = useState(false);
 
   function handleComplete() {
     const updatecompleted = list.map((t) => {
@@ -23,9 +24,13 @@ export default function List({ todo }) {
     setList(updatecompleted);
   }
 
+  // Functions Start
+
+  // Functions Deleting Todo Start
   function delelteTodo() {
     setdeleteModule(true);
   }
+
   function NotdelelteTodo() {
     setdeleteModule(false);
   }
@@ -36,10 +41,25 @@ export default function List({ todo }) {
     });
     setList(deleteTodo);
   }
+  // Functions Deleting Todo End
+
+  // Functions Update Todo Start
+  function updateTodo() {
+    setupdateModule(true);
+  }
+
+  function NoUpdateTodo() {
+    setupdateModule(false);
+  }
+  // Functions Update Todo End
+
+  // Functions Check Todo Start
+  // Functions Check Todo End
+
+  // Functions End
 
   return (
     <>
-    
       {/* Icons Start */}
       <div className="flex justify-between items-center bg-blue-950 text-white hover:h-37 duration-200 px-4 h-28 rounded-[5px] cursor-pointer mb-10 hover:shadow-xl hover:shadow-black/40">
         <div className="space-x-7 flex items-center">
@@ -55,7 +75,10 @@ export default function List({ todo }) {
           </button>
 
           {/* زرار التعديل */}
-          <button className="bg-white border-2 border-blue-500 p-1 rounded-full cursor-pointer hover:bg-blue-600 transition-colors group">
+          <button
+            onClick={updateTodo}
+            className="bg-white border-2 border-blue-500 p-1 rounded-full cursor-pointer hover:bg-blue-600 transition-colors group"
+          >
             <EditIcon
               className="text-blue-500 group-hover:text-white"
               style={{ fontSize: "35px" }}
@@ -112,6 +135,53 @@ export default function List({ todo }) {
         </div>
       </div>
       {/*  Aleart DeleteConfirm End */}
+
+      {/*  Aleart Updating Start */}
+      <div
+        className={`w-screen h-screen bg-[#000000a0] absolute inset-0 z-10 duration-300 ${updateModule ? "block" : "hidden"}`}
+      >
+        <div className="absolute top-[50%] left-[50%] transform -translate-y-[50%] -translate-x-[50%] bg-white w-[50%] h-auto rounded-sm">
+          <h2 className="font-header font-extrabold text-3xl text-right text-gray-600 pe-6 py-4">
+            تعديل المهمه
+          </h2>
+          <div>
+            <label className="block text-left ps-6 font-bold text-lg text-gray-600">
+              العنوان
+            </label>
+            <input
+              value={todo.title}
+              onChange={(event) => {
+                setList([event.target.value]);
+              }}
+              className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
+              type="text"
+              // value="قرأه كتاب 1"
+            />
+
+            <label className="block text-left ps-6 font-bold text-lg text-gray-600 mt-4">
+              التفاصيل
+            </label>
+            <input
+              value={todo.details}
+              className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
+              type="text"
+              // value="انجازه في شهر 1"
+            />
+          </div>
+          <div className="space-x-4 text-white font-extrabold text-xl mt-10 mb-8 w-full text-left ps-6">
+            <button className="cursor-pointer bg-green-600 duration-300 py-[12px] px-5 rounded-sm hover:bg-green-500">
+              حفظ التعديلات
+            </button>
+            <button
+              onClick={NoUpdateTodo}
+              className="cursor-pointer bg-red-600 duration-300 py-[12px] px-5 rounded-sm hover:bg-red-800"
+            >
+              إلغاء
+            </button>
+          </div>
+        </div>
+      </div>
+      {/*  Aleart Updating End */}
     </>
   );
 }
