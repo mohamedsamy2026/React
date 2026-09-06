@@ -11,15 +11,16 @@ export default function ToDoList() {
   const [inputValue, setInputValue] = useState("");
   const [dispayType, setDisplayType] = useState("all");
 
-  let filteredTodos = list.filter((t) => {
-    if (dispayType === "completed") {
-      return t.completed;
-    } else if (dispayType === "non-completed") {
-      return !t.completed;
-    } else {
-      return true;
-    }
-  });
+  let filteredTodos =
+    list?.filter((t) => {
+      if (dispayType === "completed") {
+        return t.completed;
+      } else if (dispayType === "non-completed") {
+        return !t.completed;
+      } else {
+        return true;
+      }
+    }) || [];
 
   let ListRead = filteredTodos.map((oneList) => {
     return <List key={oneList.id} todo={oneList} />;
