@@ -28,6 +28,7 @@ export default function List({ todo }) {
     });
 
     setList(updatecompleted);
+    localStorage.setItem("todos", JSON.stringify(updatecompleted));
   }
 
   // Functions Start
@@ -46,11 +47,12 @@ export default function List({ todo }) {
       return d.id !== todo.id;
     });
     setList(deleteTodo);
+    localStorage.setItem("todos", JSON.stringify(deleteTodo));
   }
   // Functions Deleting Todo End
 
   // Functions Update Todo Start
-  
+
   function updateTodo1() {
     setupdateModule(true);
   }
@@ -69,6 +71,7 @@ export default function List({ todo }) {
 
     setList(updatetodoonely);
     setupdateModule(false);
+    localStorage.setItem("todos", JSON.stringify(updatetodoonely));
   }
 
   // Functions Update Todo End
@@ -115,8 +118,8 @@ export default function List({ todo }) {
         </div>
 
         <div className="space-y-3">
-          <h2 className="text-right text-3xl font-extrabold">{todo.title}</h2>
-          <p className="font-medium text-lg text-gray-100">{todo.details}</p>
+          <h2 className={`text-right text-3xl font-extrabold ${todo.completed ? "line-through text-gray-400" : "none"}`}>{todo.title}</h2>
+          <p className={`font-medium text-lg text-gray-100 ${todo.completed ? "line-through text-gray-400" : "none"}`}>{todo.details}</p>
         </div>
       </div>
       {/* Icons End */}
