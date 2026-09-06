@@ -12,7 +12,7 @@ export default function ToDoList() {
   const [dispayType, setDisplayType] = useState("all");
 
   let filteredTodos =
-    list?.filter((t) => {
+    list.filter((t) => {
       if (dispayType === "completed") {
         return t.completed;
       } else if (dispayType === "non-completed") {
