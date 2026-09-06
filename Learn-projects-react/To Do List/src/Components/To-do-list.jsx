@@ -28,14 +28,16 @@ export default function ToDoList() {
   // useEffect
   useEffect(() => {
     const todosStorge = JSON.parse(localStorage.getItem("todos"));
-    setList(todosStorge);
+    if (todosStorge) {
+      setList(todosStorge);
+    }
   }, []);
 
   // Create Todo
   function createTodo() {
-    if(inputValue == ""){
-      alert("من فضلك ادخل مهمه")
-      return
+    if (inputValue == "") {
+      alert("من فضلك ادخل مهمه");
+      return;
     }
     const newTodo = {
       id: uuidv4(),
