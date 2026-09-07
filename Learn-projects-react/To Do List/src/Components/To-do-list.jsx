@@ -8,10 +8,20 @@ import AleartSucess from "./AleartSucess";
 
 export default function ToDoList() {
   const { list, setList } = useContext(checkContext);
+
   const [inputValue, setInputValue] = useState("");
+
   const [dispayType, setDisplayType] = useState("all");
-  const [deleteModule, setdeleteModule] = useState(false);
+
   const [dilogTodo, setdilogTodo] = useState(null);
+
+  const [deleteModule, setdeleteModule] = useState(false);
+
+  const [updateModule, setupdateModule] = useState(false);
+  const [updateTodo, setUpdateTodo] = useState({
+    title: "",
+    details: "",
+  });
 
   let filteredTodos = useMemo(() => {
     console.log("Completed And Not Completded");
@@ -29,7 +39,14 @@ export default function ToDoList() {
   }, [list, dispayType]);
 
   let ListRead = filteredTodos.map((oneList) => {
-    return <List key={oneList.id} todo={oneList} showDelete={showDelete} />;
+    return (
+      <List
+        key={oneList.id}
+        todo={oneList}
+        showDelete={showDelete}
+        showUpdate={showUpdate}
+      />
+    );
   });
 
   // useEffect
@@ -59,8 +76,7 @@ export default function ToDoList() {
     setInputValue("");
   }
 
-  // Functions Deleting Todo
-
+  // Functions Deleting Todo Start
   function showDelete(todo) {
     setdilogTodo(todo);
     setdeleteModule(true);
@@ -78,8 +94,31 @@ export default function ToDoList() {
     localStorage.setItem("todos", JSON.stringify(deleteTodo));
     setdeleteModule(false);
   }
-
   // Functions Deleting Todo End
+
+  // Functions Update Todo Start
+  function NoUpdate1() {
+    setupdateModule(false);
+  }
+
+  function showUpdate(todo) {
+    setdilogTodo(todo);
+    setUpdateTodo({ ...updateTodo, title: todo.title, details: todo.details });
+    setupdateModule(true);
+  }
+
+  function confirmUpdate() {
+    const updatetodoonely = list.map((t) => {
+      if (t.id == dilogTodo.id) {
+        return { ...t, title: updateTodo.title, details: updateTodo.details };
+      }
+      return t;
+    });
+    setList(updatetodoonely);
+    setupdateModule(false);
+    localStorage.setItem("todos", JSON.stringify(updatetodoonely));
+  }
+  // Functions Update Todo End
 
   return (
     <>
@@ -115,6 +154,58 @@ export default function ToDoList() {
       </div>
       {/*  Aleart DeleteConfirm End */}
 
+      {/*  Aleart Updating Start */}
+      <div
+        className={`w-screen h-screen bg-[#000000a0] absolute inset-0 z-10 duration-300 ${updateModule ? "block" : "hidden"}`}
+      >
+        <div className="absolute top-[50%] left-[50%] transform -translate-y-[50%] -translate-x-[50%] bg-white w-[50%] h-auto rounded-sm">
+          <h2 className="font-header font-extrabold text-3xl text-right text-gray-600 pe-6 py-4">
+            تعديل المهمه
+          </h2>
+          <div>
+            <label className="block text-left ps-6 font-bold text-lg text-gray-600">
+              العنوان
+            </label>
+            <input
+              value={updateTodo.title}
+              onChange={(event) => {
+                setUpdateTodo({ ...updateTodo, title: event.target.value });
+              }}
+              className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
+              type="text"
+            />
+
+            <label className="block text-left ps-6 font-bold text-lg text-gray-600 mt-4">
+              التفاصيل
+            </label>
+            <input
+              value={updateTodo.details}
+              onChange={(event) => {
+                setUpdateTodo({ ...updateTodo, details: event.target.value });
+              }}
+              className="w-[95%] font-bold text-xl text-right py-3 border-b-2 border-gray-500 focus:border-[#88173d] duration-300 outline-0 pe-2"
+              type="text"
+            />
+          </div>
+          <div className="space-x-4 text-white font-extrabold text-xl mt-10 mb-8 w-full text-left ps-6">
+            <button
+              onClick={confirmUpdate}
+              className="cursor-pointer bg-green-600 duration-300 py-[12px] px-5 rounded-sm hover:bg-green-500"
+            >
+              حفظ التعديلات
+            </button>
+            <button
+              onClick={NoUpdate1}
+              className="cursor-pointer bg-red-600 duration-300 py-[12px] px-5 rounded-sm hover:bg-red-800"
+            >
+              إلغاء
+            </button>
+          </div>
+        </div>
+      </div>
+      {/*  Aleart Updating End */}
+
+      {/* Home Start */}
       <div className="bg-white  w-[40%] h-auto py-5 px-6 rounded-[10px] text-center max-h-[80vh] overflow-auto">
         <div>
           <h1 className="font-black text-7xl font-header border-b-1 border-gray-400">
@@ -184,6 +275,7 @@ export default function ToDoList() {
 
         <AleartSucess />
       </div>
+      {/* Home End */}
     </>
   );
 }
