@@ -4,10 +4,11 @@ import { checkContext } from "../Context/context";
 
 // Components
 import List from "./todo";
-import AleartSucess from "./AleartSucess";
+import { SuccessContext } from "../Context/AleartSuccessContext";
 
 export default function ToDoList() {
   const { list, setList } = useContext(checkContext);
+  const { hideAleartSuccess } = useContext(SuccessContext);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -74,6 +75,7 @@ export default function ToDoList() {
     setList(updatedTodo);
     localStorage.setItem("todos", JSON.stringify(updatedTodo));
     setInputValue("");
+    hideAleartSuccess("تمت الاضافه بنجاح");
   }
 
   // Functions Deleting Todo Start
@@ -93,6 +95,7 @@ export default function ToDoList() {
     setList(deleteTodo);
     localStorage.setItem("todos", JSON.stringify(deleteTodo));
     setdeleteModule(false);
+    hideAleartSuccess("تم الحذف بنجاح");
   }
   // Functions Deleting Todo End
 
@@ -117,6 +120,7 @@ export default function ToDoList() {
     setList(updatetodoonely);
     setupdateModule(false);
     localStorage.setItem("todos", JSON.stringify(updatetodoonely));
+    hideAleartSuccess("تم التحديث بنجاح");
   }
   // Functions Update Todo End
 
@@ -272,8 +276,6 @@ export default function ToDoList() {
           />
         </div>
         {/* Create Todo End */}
-
-        <AleartSucess />
       </div>
       {/* Home End */}
     </>
