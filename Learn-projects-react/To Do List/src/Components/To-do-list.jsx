@@ -4,11 +4,11 @@ import { checkContext } from "../Context/context";
 
 // Components
 import List from "./todo";
-import { SuccessContext } from "../Context/AleartSuccessContext";
+import { useAleart } from "../Context/AleartSuccessContext";
 
 export default function ToDoList() {
   const { list, setList } = useContext(checkContext);
-  const { hideAleartSuccess } = useContext(SuccessContext);
+  const { hideAleartSuccess } = useAleart();
 
   const [inputValue, setInputValue] = useState("");
 

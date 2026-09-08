@@ -5,12 +5,12 @@ import CheckIcon from "@mui/icons-material/Check";
 
 // Hooks
 import { useContext } from "react";
-import { SuccessContext } from "../Context/AleartSuccessContext";
+import { useAleart } from "../Context/AleartSuccessContext";
 import { checkContext } from "../Context/context";
 
 export default function List({ todo, showDelete, showUpdate }) {
   const { list, setList } = useContext(checkContext);
-  const { hideAleartSuccess } = useContext(SuccessContext);
+  const { hideAleartSuccess } = useAleart();
 
   function handleComplete() {
     const updatecompleted = list.map((t) => {
@@ -22,7 +22,7 @@ export default function List({ todo, showDelete, showUpdate }) {
 
     setList(updatecompleted);
     localStorage.setItem("todos", JSON.stringify(updatecompleted));
-    hideAleartSuccess("تم التعديل بنجاح")
+    hideAleartSuccess("تم التعديل بنجاح");
   }
 
   // Functions Deleting Todo Start
