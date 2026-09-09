@@ -2,6 +2,7 @@ import "./App.css";
 import Home from "./Home";
 import Posts from "./Posts";
 import About from "./About";
+import LearnReduser from "./LearnReduser"
 // Import React Router
 import { Route, Routes, Link } from "react-router-dom";
 import PostDetails from "./PostDetails";
@@ -53,6 +54,7 @@ function App() {
   // ];
 
   return (
+
     // <postsContext.Provider value={postsAll}>
     //   <>
     //     <h1>Hello</h1>
@@ -106,10 +108,18 @@ function App() {
       </ThemeProvider> */}
 
       {/* <Grid /> */}
-      <div className="w-12 h-12 bg-red-200 hover:bg-red-300 rounded-full flex items-center justify-center cursor-pointer duration-200 mx-auto mt-100">
+      {/* <div className="w-12 h-12 bg-red-200 hover:bg-red-300 rounded-full flex items-center justify-center cursor-pointer duration-200 mx-auto mt-100">
         <DeleteIcon style={{ fontSize: "30px" }} className="text-red-500" />
       </div>
-      <FontAsome/>
+      <FontAsome/> */}
+
+
+        {/* USeReduser Start */}
+        <LearnReduser/>
+        {/* USeReduser End */}
+
+
+
     </>
   );
 }
