@@ -2,10 +2,11 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function reduserTodos(list, action) {
   const type = action.type;
+
   if (type == "add") {
     if (action.payload == "") {
       alert("من فضلك ادخل مهمه");
-      return;
+      return list; // يفضل ترجع الـ list القديمة بدل ما ترجع undefined
     }
     const newTodo = {
       id: uuidv4(),
@@ -16,8 +17,6 @@ export default function reduserTodos(list, action) {
 
     const updatedTodo = [...list, newTodo];
     localStorage.setItem("todos", JSON.stringify(updatedTodo));
-
-    // هسيل جيمناي
     return updatedTodo;
   } else if (type == "delete") {
     const deleteTodo = list.filter((d) => {
@@ -37,19 +36,19 @@ export default function reduserTodos(list, action) {
     return updatetodoonely;
   } else if (type == "getStorge") {
     const todosStorge = JSON.parse(localStorage.getItem("todos"));
-    if (todosStorge) {
-      return todosStorge;
-    }
+    return todosStorge ? todosStorge : [];
   } else if (type == "toggleCompledted") {
     const updatecompleted = list.map((t) => {
       if (t.id === action.payload.id) {
         return { ...t, completed: !t.completed };
-
       }
       return t;
     });
 
-    localStorage.setItem("todo  s", JSON.stringify(updatecompleted));
+    // خد بالك هنا كان فيه مسافات زيادة في اسم الكีย์ "todo  s" وصلحناها لـ "todos"
+    localStorage.setItem("todos", JSON.stringify(updatecompleted));
     return updatecompleted;
+  } else {
+    return list;
   }
 }
