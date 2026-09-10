@@ -1,8 +1,8 @@
 import "./App.css";
 import ToDoList from "./Components/To-do-list";
+import TodosContext from "./Context/TodosContext";
 
 // Hooks
-import { checkContext } from "./Context/context";
 import { useState } from "react";
 import { ALeartProvider } from "./Context/AleartSuccessContext";
 
@@ -13,13 +13,11 @@ function App() {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-900">
-      <ALeartProvider>
-        
-        <checkContext.Provider value={{ list, setList }}>
-          <ToDoList />
-        </checkContext.Provider>
-        
-      </ALeartProvider>
+      <TodosContext>
+        <ALeartProvider>
+            <ToDoList />
+        </ALeartProvider>
+      </TodosContext>
     </div>
   );
 }

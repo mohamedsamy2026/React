@@ -1,12 +1,11 @@
-import { useReducer, useState } from "react";
+import { useState, useReducer } from "react";
 
-function Reduser(resultState, action) {
+function resultReduser(result, action) {
   const type = action.type;
+  const { firstNumber, lastNumber } = action.payload;
 
   if (type == "sum") {
-    const { firstNumbe, lastNumbe } = action.payload;
-
-    return Number(firstNumbe) + Number(lastNumbe);
+    return Number(firstNumber) + Number(lastNumber);
   }
 }
 
@@ -16,14 +15,14 @@ export default function UseReduser() {
   const [result, setresult] = useState(0);
 
   //   USeReduser
-  const [result2, dispatch] = useReducer(Reduser, 0);
+  const [result2, dispatch] = useReducer(resultReduser, 0);
 
   function sum() {
     dispatch({
       type: "sum",
       payload: {
-        firstNumbe: firstNumber,
-        lastNumbe: lastNumber,
+        firstNumber: firstNumber,
+        lastNumber: lastNumber,
       },
     });
   }
@@ -55,10 +54,13 @@ export default function UseReduser() {
         Sum
       </button>
 
-      <h1 className=" my-10 text-2xl bg-blue-400 px-8 py-2 rounded-lg">
+      <h1 className="text-2xl my-10 bg-blue-400 px-8 py-2 rounded-lg">
+        {result}
+      </h1>
+
+      <h1 className="text-2xl my-10 bg-red-400 px-8 py-2 rounded-lg">
         {result2}
       </h1>
-      <h1 className="text-2xl bg-blue-400 px-8 py-2 rounded-lg">{result}</h1>
     </div>
   );
 }

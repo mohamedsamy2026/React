@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حاسبة مساحة منصة الغازي</title>
+<style>
+  :root{
+    --ink:#1c1f22;
+    --paper:#f6f3ec;
+    --line:#d8d2c4;
+    --panel:#ffffff;
+    --accent:#2f5d50;
+    --accent-soft:#e4ede9;
+    --warn:#8a4b2f;
+    --warn-soft:#f3e6dd;
+    --danger:#9c2f2f;
+    --danger-soft:#f7e3e0;
+    --muted:#6b6a63;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Segoe UI', Tahoma, Arial, sans-serif;
+    padding:32px 16px 64px;
+    direction:rtl;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+  header{margin-bottom:28px;}
+  h1{
+    font-size:28px;
+    margin:0 0 6px;
+    font-weight:700;
+    letter-spacing:-0.2px;
+  }
+  .sub{color:var(--muted);font-size:15px;line-height:1.6;max-width:60ch;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:20px;
+  }
+  @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+  }
+  .card h3{
+    margin:0 0 4px;
+    font-size:15px;
+    font-weight:700;
+  }
+  .card .hint{
+    color:var(--muted);
+    font-size:12.5px;
+    margin-bottom:12px;
+    line-height:1.5;
+  }
+  label{
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin:10px 0 4px;
+  }
+  input[type=number]{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid var(--line);
+    border-radius:7px;
+    font-size:14px;
+    background:#fdfcf9;
+    color:var(--ink);
+  }
+  input[type=number]:focus{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
+  }
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+  .results{margin-top:30px;}
+  .results h2{font-size:18px;margin-bottom:14px;}
+
+  .result-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .result-left{flex:1;min-width:220px;}
+  .result-name{font-weight:700;font-size:15px;margin-bottom:3px;}
+  .result-detail{font-size:13px;color:var(--muted);line-height:1.6;}
+  .result-badge{
+    text-align:center;
+    padding:10px 18px;
+    border-radius:8px;
+    min-width:150px;
+  }
+  .result-badge .num{font-size:20px;font-weight:700;display:block;}
+  .result-badge .lbl{font-size:12px;margin-top:2px;display:block;}
+
+  .status-ok{background:var(--accent-soft);color:var(--accent);}
+  .status-warn{background:var(--warn-soft);color:var(--warn);}
+  .status-danger{background:var(--danger-soft);color:var(--danger);}
+
+  .bar-track{
+    height:6px;
+    background:var(--line);
+    border-radius:3px;
+    margin-top:10px;
+    overflow:hidden;
+  }
+  .bar-fill{height:100%;border-radius:3px;transition:width .3s ease;}
+
+  .note{
+    margin-top:24px;
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.7;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>حاسبة عمر مساحة منصة الغازي</h1>
+    <p class="sub">دخّل أرقام الاستخدام الأسبوعي بتاعك، والحاسبة هتقولك تلقائياً كل خدمة هتفضل شغالة قد إيه قبل ما تحتاج تفريغ مساحة أو ترقية.</p>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h3>جوجل درايف — الملازم (PDF)</h3>
+      <div class="hint">المساحة المجانية: 15 جيجا</div>
+      <label>صفحات PDF في الأسبوع</label>
+      <input type="number" id="gd_pages" value="50" min="0">
+      <label>متوسط حجم الصفحة (كيلوبايت)</label>
+      <input type="number" id="gd_kb" value="300" min="1">
+      <label>المساحة المستخدمة حالياً (جيجا)</label>
+      <input type="number" id="gd_used" value="0" min="0" step="0.1">
+    </div>
+
+    <div class="card">
+      <h3>Cloudinary — الصور</h3>
+      <div class="hint">25 كريدت/شهر (كريدت = 1 جيجا تخزين أو باندويث)</div>
+      <label>صور جديدة في الأسبوع</label>
+      <input type="number" id="cl_imgs" value="60" min="0">
+      <label>متوسط حجم الصورة بعد الضغط (كيلوبايت)</label>
+      <input type="number" id="cl_kb" value="150" min="1">
+      <label>عدد فتحات الصورة المتوقعة شهرياً (باندويث)</label>
+      <input type="number" id="cl_views" value="10000" min="0">
+    </div>
+
+    <div class="card">
+      <h3>Supabase — النصوص والدرجات</h3>
+      <div class="hint">المساحة المجانية: 500 ميجا</div>
+      <label>عدد الطلاب</label>
+      <input type="number" id="sb_students" value="1000" min="0">
+      <label>امتحانات في الأسبوع</label>
+      <input type="number" id="sb_exams" value="6" min="0">
+      <label>متوسط حجم سجل الطالب الواحد (كيلوبايت)</label>
+      <input type="number" id="sb_kb" value="5" min="0.1" step="0.1">
+    </div>
+
+    <div class="card">
+      <h3>يوتيوب — الفيديوهات</h3>
+      <div class="hint">مساحة غير محدودة عملياً</div>
+      <label>فيديوهات في الأسبوع</label>
+      <input type="number" id="yt_vids" value="20" min="0">
+      <div class="hint" style="margin-top:10px;">ده بس عشان المتابعة، مفيش حد للتخزين هنا.</div>
+    </div>
+  </div>
+
+  <div class="results">
+    <h2>النتيجة</h2>
+    <div id="output"></div>
+  </div>
+
+  <div class="note">
+    الأرقام دي تقديرية بناءً على المعطيات اللي دخّلتها، مش أرقام رسمية من الشركات. المفروض تستخدمها كمؤشر تقريبي عشان تعرف امتى تراجع الداشبورد الحقيقي بتاع كل خدمة، مش كبديل نهائي عنه.
+  </div>
+</div>
+
+
+<script>
+  const ids = ['gd_pages','gd_kb','gd_used','cl_imgs','cl_kb','cl_views','sb_students','sb_exams','sb_kb','yt_vids'];
+  ids.forEach(id => document.getElementById(id).addEventListener('input', render));
+
+  function weeksLabel(weeks){
+    if(!isFinite(weeks) || weeks > 5200) return {text:'أكتر من 100 سنة', status:'ok'};
+    const years = weeks/52;
+    if(years >= 2) return {text: Math.round(years) + ' سنة تقريباً', status: years > 5 ? 'ok' : (years > 1.5 ? 'ok' : 'warn')};
+    if(weeks >= 8) return {text: Math.round(weeks/4.3) + ' شهر تقريباً', status: weeks/4.3 > 6 ? 'ok' : 'warn'};
+    return {text: Math.round(weeks) + ' أسبوع', status: weeks < 4 ? 'danger' : 'warn'};
+  }
+
+  function card(name, detail, weeks, pctUsed){
+    const r = weeksLabel(weeks);
+    const statusClass = 'status-' + r.status;
+    const barColor = r.status === 'ok' ? '#2f5d50' : (r.status === 'warn' ? '#8a4b2f' : '#9c2f2f');
+    const pct = Math.min(100, Math.max(0, pctUsed));
+    return `
+      <div class="result-card">
+        <div class="result-left">
+          <div class="result-name">${name}</div>
+          <div class="result-detail">${detail}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+        </div>
+        <div class="result-badge ${statusClass}">
+          <span class="num">${r.text}</span>
+          <span class="lbl">قبل ما تحتاج تتصرف</span>
+        </div>
+      </div>`;
+  }
+
+  function render(){
+    const v = id => parseFloat(document.getElementById(id).value) || 0;
+
+    // Google Drive
+    const gdWeeklyMB = (v('gd_pages') * v('gd_kb')) / 1024;
+    const gdFreeGB = 15;
+    const gdRemainingGB = Math.max(0, gdFreeGB - v('gd_used'));
+    const gdWeeks = gdWeeklyMB > 0 ? (gdRemainingGB*1024) / gdWeeklyMB : Infinity;
+    const gdPct = (v('gd_used')/gdFreeGB)*100;
+
+    // Cloudinary — storage credits + bandwidth credits combined pool (25/month)
+    const clWeeklyStorageGB = (v('cl_imgs') * v('cl_kb')) / (1024*1024);
+    const clMonthlyStorageGB = clWeeklyStorageGB * 4.3;
+    const clMonthlyBandwidthGB = (v('cl_views') * v('cl_kb')) / (1024*1024);
+    const clMonthlyCreditsUsed = clMonthlyStorageGB + clMonthlyBandwidthGB;
+    const clFreeCredits = 25;
+    const clPct = (clMonthlyCreditsUsed/clFreeCredits)*100;
+    // storage accumulates month over month; estimate weeks until stored images alone eat all 25 credits
+    const clWeeksToFillStorage = clWeeklyStorageGB > 0 ? (clFreeCredits) / clWeeklyStorageGB : Infinity;
+
+    // Supabase
+    const sbFreeMB = 500;
+    const sbWeeklyMB = (v('sb_students') * v('sb_exams') * v('sb_kb')) / 1024;
+    const sbWeeks = sbWeeklyMB > 0 ? sbFreeMB / sbWeeklyMB : Infinity;
+
+    let html = '';
+    html += card(
+      'جوجل درايف (الملازم)',
+      `بتضيف حوالي ${(gdWeeklyMB).toFixed(1)} ميجا في الأسبوع`,
+      gdWeeks,
+      gdPct
+    );
+    html += card(
+      'Cloudinary (الصور — تخزين)',
+      `بتضيف حوالي ${(clWeeklyStorageGB*1024).toFixed(0)} ميجا تخزين في الأسبوع`,
+      clWeeksToFillStorage,
+      (clMonthlyStorageGB/clFreeCredits)*100
+    );
+    html += card(
+      'Cloudinary (الباندويث الشهري)',
+      `استهلاك متوقع ${clMonthlyCreditsUsed.toFixed(1)} كريدت من أصل 25 كريدت شهرياً`,
+      clMonthlyCreditsUsed >= clFreeCredits ? 0 : Infinity,
+      clPct
+    );
+    html += card(
+      'Supabase (النصوص والدرجات)',
+      `بتضيف حوالي ${sbWeeklyMB.toFixed(2)} ميجا في الأسبوع`,
+      sbWeeks,
+      ((sbFreeMB - sbWeeks*sbWeeklyMB > 0 ? 0 : 0))
+    );
+    html += `
+      <div class="result-card">
+        <div class="result-left">
+          <div class="result-name">يوتيوب (الفيديوهات)</div>
+          <div class="result-detail">${v('yt_vids')} فيديو/أسبوع — التخزين غير محدود عملياً، مفيش حد تخزين يقلقك هنا</div>
+        </div>
+        <div class="result-badge status-ok">
+          <span class="num">مفيش حد</span>
+          <span class="lbl">تخزين غير محدود</span>
+        </div>
+      </div>`;
+
+    document.getElementById('output').innerHTML = html;
+  }
+
+  render();
+</script>
+</body>
+</html>

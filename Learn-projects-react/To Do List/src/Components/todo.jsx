@@ -4,24 +4,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 
 // Hooks
-import { useContext } from "react";
 import { useAleart } from "../Context/AleartSuccessContext";
-import { checkContext } from "../Context/context";
+import { useDispatch } from "../Context/TodosContext";
 
 export default function List({ todo, showDelete, showUpdate }) {
-  const { list, setList } = useContext(checkContext);
+  const dispatch  = useDispatch();
+
   const { hideAleartSuccess } = useAleart();
 
   function handleComplete() {
-    const updatecompleted = list.map((t) => {
-      if (t.id === todo.id) {
-        return { ...t, completed: !t.completed };
-      }
-      return t;
-    });
-
-    setList(updatecompleted);
-    localStorage.setItem("todos", JSON.stringify(updatecompleted));
+    dispatch({ type: "toggleCompledted", payload: todo });
     hideAleartSuccess("تم التعديل بنجاح");
   }
 

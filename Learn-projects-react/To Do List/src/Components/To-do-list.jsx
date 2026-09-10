@@ -1,13 +1,16 @@
-import { v4 as uuidv4 } from "uuid";
-import { useState, useContext, useEffect, useMemo } from "react";
-import { checkContext } from "../Context/context";
+import { useState, useEffect, useMemo } from "react";
+import { useTodos, useDispatch } from "../Context/TodosContext";
 
 // Components
 import List from "./todo";
 import { useAleart } from "../Context/AleartSuccessContext";
 
 export default function ToDoList() {
-  const { list, setList } = useContext(checkContext);
+  
+  // UseReduser
+  const list = useTodos();
+  const dispatch = useDispatch();
+
   const { hideAleartSuccess } = useAleart();
 
   const [inputValue, setInputValue] = useState("");
@@ -25,7 +28,6 @@ export default function ToDoList() {
   });
 
   let filteredTodos = useMemo(() => {
-    console.log("Completed And Not Completded");
     return (
       list.filter((t) => {
         if (dispayType === "completed") {
@@ -52,28 +54,17 @@ export default function ToDoList() {
 
   // useEffect
   useEffect(() => {
-    const todosStorge = JSON.parse(localStorage.getItem("todos"));
-    if (todosStorge) {
-      setList(todosStorge);
-    }
+    dispatch({ type: "getStorge" });
   }, []);
 
   // Create Todo
   function createTodo() {
-    if (inputValue == "") {
-      alert("من فضلك ادخل مهمه");
-      return;
-    }
-    const newTodo = {
-      id: uuidv4(),
-      title: inputValue,
-      details: "",
-      completed: false,
-    };
+    dispatch({
+      type: "add",
+      payload: inputValue,
+      
+    });
 
-    const updatedTodo = [...list, newTodo];
-    setList(updatedTodo);
-    localStorage.setItem("todos", JSON.stringify(updatedTodo));
     setInputValue("");
     hideAleartSuccess("تمت الاضافه بنجاح");
   }
@@ -89,11 +80,10 @@ export default function ToDoList() {
   }
 
   function handleDeleteConfirm() {
-    const deleteTodo = list.filter((d) => {
-      return d.id !== dilogTodo.id;
+    dispatch({
+      type: "delete",
+      payload: dilogTodo,
     });
-    setList(deleteTodo);
-    localStorage.setItem("todos", JSON.stringify(deleteTodo));
     setdeleteModule(false);
     hideAleartSuccess("تم الحذف بنجاح");
   }
@@ -111,15 +101,14 @@ export default function ToDoList() {
   }
 
   function confirmUpdate() {
-    const updatetodoonely = list.map((t) => {
-      if (t.id == dilogTodo.id) {
-        return { ...t, title: updateTodo.title, details: updateTodo.details };
-      }
-      return t;
+    dispatch({
+      type: "update",
+      payload: {
+        dilogTodo: dilogTodo,
+        updateTodo: updateTodo,
+      },
     });
-    setList(updatetodoonely);
     setupdateModule(false);
-    localStorage.setItem("todos", JSON.stringify(updatetodoonely));
     hideAleartSuccess("تم التحديث بنجاح");
   }
   // Functions Update Todo End
