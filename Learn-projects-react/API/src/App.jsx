@@ -1,16 +1,12 @@
-import dayjs from "dayjs";
-import "dayjs/locale/ar";
-import "dayjs/locale/en";
-
 import "./App.css";
 import axios from "axios";
-
 import { useEffect, useState } from "react";
+import dayjs from 'dayjs';
 
-dayjs.locale("ar");
+dayjs.locale('ar'); 
 
 function App() {
-  const [locel, setLocel] = useState("ar");
+  const [locel, setlocal] = useState("ar")
   const [temperature, setTemperature] = useState({
     temp: null,
     min: null,
@@ -18,6 +14,7 @@ function App() {
     description: "",
     icon: null,
   });
+
 
 
   useEffect(() => {
@@ -48,9 +45,9 @@ function App() {
     };
   }, []);
 
-  function handleLanguche() {
-    setLocel(locel === "ar" ? "en" : "ar");
-  }
+    function handleLanguche(){
+      setlocal(locel == "en" ? "ar" : "en")
+    }
   return (
     <div
       className="bg-[#1e5ee5] h-screen flex justify-center items-center flex-col w-full"
@@ -60,7 +57,7 @@ function App() {
         {/* Heaher Start */}
         <div className="flex justify-between items-center pb-4 border-b border-blue-400/30 ">
           <h2 className="text-5xl font-bold">القاهره</h2>
-          <h4 className="text-lg font-bold text-gray-200">{fullDateTime}</h4>
+          <h4 className="text-lg font-bold text-gray-200">١١-٩-٢٠٢٦</h4>
         </div>
         {/* Heaher End */}
 
@@ -98,10 +95,7 @@ function App() {
       </div>
 
       {/* زر اللغة في الزاوية */}
-      <button
-        className="text-xl font-bold bg-white text-blue-500 cursor-pointer mt-4 py-3 px-5 rounded-lg hover:bg-blue-500 hover:text-white duration-400 absolute top-[68%] left-[37.6%]"
-        onClick={handleLanguche}
-      >
+      <button className="text-xl font-bold bg-white text-blue-500 cursor-pointer mt-4 py-3 px-5 rounded-lg hover:bg-blue-500 hover:text-white duration-400 absolute top-[68%] left-[37.6%]" onClick={handleLanguche}>
         {locel == "ar" ? "English" : "عربي"}
       </button>
     </div>
