@@ -1,6 +1,44 @@
 import "./App.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 
 function App() {
+  const [temperature, setTemperature] = useState({
+    temp: null,
+    min: null,
+    max: null,
+    description: "",
+    icon: null,
+  });
+
+  useEffect(() => {
+    const control = new AbortController();
+
+    axios
+      .get(
+        "https://api.openweathermap.org/data/2.5/weather?lat=30.0333&lon=31.2333&appid=bdc36c23828ca70eafb1a14accb000e7&units=metric",
+        {
+          signal: control.signal,
+        },
+      )
+      .then((response) => {
+        setTemperature({
+          temp: Math.round(response.data.main.temp),
+          min: Math.round(response.data.main.temp_min),
+          max: Math.round(response.data.main.temp_max),
+          description: response.data.weather[0].description,
+          icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    return () => {
+      control.abort();
+    };
+  }, []);
   return (
     <div
       className="bg-[#1e5ee5] h-screen flex justify-center items-center flex-col w-full"
@@ -9,7 +47,7 @@ function App() {
       <div className="bg-[#1b4db1] w-[500px] rounded-2xl p-6 text-white shadow-xl flex flex-col justify-between">
         {/* Heaher Start */}
         <div className="flex justify-between items-center pb-4 border-b border-blue-400/30 ">
-          <h2 className="text-5xl font-bold">مصر</h2>
+          <h2 className="text-5xl font-bold">القاهره</h2>
           <h4 className="text-lg font-bold text-gray-200">١١-٩-٢٠٢٦</h4>
         </div>
         {/* Heaher End */}
@@ -17,12 +55,14 @@ function App() {
         {/* Context start */}
         <div className="flex justify-between items-center my-8">
           {/* درجة الحرارة وحالة الجو */}
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-center">
             <div className="flex items-center gap-2">
-              {/* img culctry */}
-              <span className="text-8xl font-light">38</span>
+              <span className="text-8xl font-light">{temperature.temp}</span>
+              <img src={temperature.icon} alt="sasass " />
             </div>
-            <span className="text-gray-100 text-md mt-3">broken clouds</span>
+            <span className="text-gray-100 text-xl font-bold mt-3">
+              {temperature.description}
+            </span>
           </div>
 
           {/* أيقونة السحابة الكبيرة */}
@@ -39,9 +79,9 @@ function App() {
 
         {/* الجزء السفلي: الصغرى والكبرى */}
         <div className="flex justify-start gap-x-3 text-md text-white pt-2">
-          <span>الصغرى: 38</span>
+          <span>الصغرى: {temperature.min}</span>
           <span> | </span>
-          <span>الكبري 38</span>
+          <span>الكبري : {temperature.max}</span>
         </div>
       </div>
 
