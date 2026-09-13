@@ -58,7 +58,7 @@ function App() {
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-2">
               <span className="text-8xl font-light">{temperature.temp}</span>
-              <img src={temperature.icon} alt="sasass " />
+              <img src={temperature.icon} alt="" />
             </div>
             <span className="text-gray-100 text-xl font-bold mt-3">
               {temperature.description}
