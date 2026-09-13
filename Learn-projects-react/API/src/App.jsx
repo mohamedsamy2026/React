@@ -1,12 +1,14 @@
 import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import dayjs from 'dayjs';
 
-dayjs.locale('ar'); 
+import dayjs from "dayjs";
+import "dayjs/locale/ar";
+import "dayjs/locale/en";
 
 function App() {
-  const [locel, setlocal] = useState("ar")
+  const [locel, setlocal] = useState("ar");
+  const [time, setTime] = useState("");
   const [temperature, setTemperature] = useState({
     temp: null,
     min: null,
@@ -15,7 +17,10 @@ function App() {
     icon: null,
   });
 
-
+  useEffect(() => { 
+    dayjs.locale(locel);
+    setTime(dayjs().format("D-M-YYYY MMMM"));
+  }, [locel]);
 
   useEffect(() => {
     const control = new AbortController();
@@ -45,19 +50,21 @@ function App() {
     };
   }, []);
 
-    function handleLanguche(){
-      setlocal(locel == "en" ? "ar" : "en")
-    }
+  function handleLanguche() {
+    setlocal(locel == "en" ? "ar" : "en");
+
+  }
+  const dir = locel == "ar" ? "rtl" : "ltr"
   return (
     <div
       className="bg-[#1e5ee5] h-screen flex justify-center items-center flex-col w-full"
-      dir="rtl"
+      dir={dir}
     >
       <div className="bg-[#1b4db1] w-[500px] rounded-2xl p-6 text-white shadow-xl flex flex-col justify-between">
         {/* Heaher Start */}
         <div className="flex justify-between items-center pb-4 border-b border-blue-400/30 ">
           <h2 className="text-5xl font-bold">القاهره</h2>
-          <h4 className="text-lg font-bold text-gray-200">١١-٩-٢٠٢٦</h4>
+          <h4 className="text-lg font-bold text-gray-200">{time}</h4>
         </div>
         {/* Heaher End */}
 
@@ -95,7 +102,10 @@ function App() {
       </div>
 
       {/* زر اللغة في الزاوية */}
-      <button className="text-xl font-bold bg-white text-blue-500 cursor-pointer mt-4 py-3 px-5 rounded-lg hover:bg-blue-500 hover:text-white duration-400 absolute top-[68%] left-[37.6%]" onClick={handleLanguche}>
+      <button
+        className="text-xl font-bold text-white text-2xl cursor-pointer mt-4 py-3 px-5 rounded-lg  duration-400 w-[27%] text-end"
+        onClick={handleLanguche} dir={dir}
+      >
         {locel == "ar" ? "English" : "عربي"}
       </button>
     </div>
