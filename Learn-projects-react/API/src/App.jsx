@@ -2,11 +2,13 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import "dayjs/locale/en";
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [locel, setlocal] = useState("ar");
   const [time, setTime] = useState("");
   const [temperature, setTemperature] = useState({
@@ -17,7 +19,7 @@ function App() {
     icon: null,
   });
 
-  useEffect(() => { 
+  useEffect(() => {
     dayjs.locale(locel);
     setTime(dayjs().format("D-M-YYYY MMMM"));
   }, [locel]);
@@ -51,10 +53,11 @@ function App() {
   }, []);
 
   function handleLanguche() {
-    setlocal(locel == "en" ? "ar" : "en");
-
+    const nextLang = locel === "ar" ? "en" : "ar";
+    i18n.changeLanguage(nextLang);
+    setlocal(nextLang);
   }
-  const dir = locel == "ar" ? "rtl" : "ltr"
+  const dir = locel == "ar" ? "rtl" : "ltr";
   return (
     <div
       className="bg-[#1e5ee5] h-screen flex justify-center items-center flex-col w-full"
@@ -63,7 +66,7 @@ function App() {
       <div className="bg-[#1b4db1] w-[500px] rounded-2xl p-6 text-white shadow-xl flex flex-col justify-between">
         {/* Heaher Start */}
         <div className="flex justify-between items-center pb-4 border-b border-blue-400/30 ">
-          <h2 className="text-5xl font-bold">القاهره</h2>
+          <h2 className="text-5xl font-bold">{t("cairo")}</h2>
           <h4 className="text-lg font-bold text-gray-200">{time}</h4>
         </div>
         {/* Heaher End */}
@@ -95,16 +98,17 @@ function App() {
 
         {/* الجزء السفلي: الصغرى والكبرى */}
         <div className="flex justify-start gap-x-3 text-md text-white pt-2">
-          <span>الصغرى: {temperature.min}</span>
+          <span>{t("min")}: {temperature.min}</span>
           <span> | </span>
-          <span>الكبري : {temperature.max}</span>
+          <span>{t("max")} : {temperature.max}</span>
         </div>
       </div>
 
       {/* زر اللغة في الزاوية */}
       <button
         className="text-xl font-bold text-white text-2xl cursor-pointer mt-4 py-3 px-5 rounded-lg  duration-400 w-[27%] text-end"
-        onClick={handleLanguche} dir={dir}
+        onClick={handleLanguche}
+        dir={dir}
       >
         {locel == "ar" ? "English" : "عربي"}
       </button>
