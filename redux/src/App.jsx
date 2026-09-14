@@ -28,23 +28,52 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ backgroundColor: "#0f766e", height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-        <label style={{ color: "black", fontWeight: "bold" }}>First Number</label>
-        <input 
-          type="number" 
-          onChange={(e) => setFirstNumberInput(e.target.value)} 
+    <div
+      className="App"
+      style={{
+        backgroundColor: "#0f766e",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <label style={{ color: "black", fontWeight: "bold" }}>
+          First Number
+        </label>
+        <input
+          type="number"
+          onChange={(e) => setFirstNumberInput(e.target.value)}
           style={{ padding: "5px", width: "200px" }}
         />
 
-        <label style={{ color: "black", fontWeight: "bold" }}>Second Number</label>
-        <input 
-          type="number" 
-          onChange={(e) => setSecondNumberInput(e.target.value)} 
+        <label style={{ color: "black", fontWeight: "bold" }}>
+          Second Number
+        </label>
+        <input
+          type="number"
+          onChange={(e) => setSecondNumberInput(e.target.value)}
           style={{ padding: "5px", width: "200px" }}
         />
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "5px", marginTop: "10px", width: "100px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px",
+            marginTop: "10px",
+            width: "100px",
+          }}
+        >
           <button onClick={handleSumClick}>sum</button>
           <button onClick={handleSubClick}>subtract</button>
           <button onClick={handleMultClick}>multiply</button>
@@ -52,7 +81,9 @@ function App() {
         </div>
 
         {result !== null && (
-          <h2 style={{ color: "white", marginTop: "15px" }}>Result: {result}</h2>
+          <h2 style={{ color: "white", marginTop: "15px" }}>
+            Result: {result}
+          </h2>
         )}
       </div>
     </div>
