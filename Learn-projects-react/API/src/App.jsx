@@ -1,16 +1,28 @@
+// App CSS Start
 import "./App.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
+// App CSS End
 
+// Hooks Start
+import { useEffect } from "react";
+import { useState } from "react";
+// Hooks End
+
+// Libraris Start
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import "dayjs/locale/en";
+// Libraris End
 
 function App() {
-  const { t, i18n } = useTranslation();
+  // UseState Start
   const [locel, setlocal] = useState("ar");
+
+  const { t, i18n } = useTranslation();
+
   const [time, setTime] = useState("");
+
   const [temperature, setTemperature] = useState({
     temp: null,
     min: null,
@@ -18,7 +30,9 @@ function App() {
     description: "",
     icon: null,
   });
+  // UseState End
 
+  // UseEffect Start
   useEffect(() => {
     dayjs.locale(locel);
     setTime(dayjs().format("D-M-YYYY MMMM"));
@@ -51,14 +65,22 @@ function App() {
       control.abort();
     };
   }, []);
+  // UseEffect End
 
+  // Functions Start
   function handleLanguche() {
     const nextLang = locel === "ar" ? "en" : "ar";
     i18n.changeLanguage(nextLang);
     setlocal(nextLang);
   }
+  // Functions End
+
+  // Languche Start
   const dir = locel == "ar" ? "rtl" : "ltr";
+  // Languche End
+
   return (
+    // JSX Start
     <div
       className="bg-[#1e5ee5] h-screen flex justify-center items-center flex-col w-full"
       dir={dir}
@@ -98,9 +120,13 @@ function App() {
 
         {/* الجزء السفلي: الصغرى والكبرى */}
         <div className="flex justify-start gap-x-3 text-md text-white pt-2">
-          <span>{t("min")}: {temperature.min}</span>
+          <span>
+            {t("min")}: {temperature.min}
+          </span>
           <span> | </span>
-          <span>{t("max")} : {temperature.max}</span>
+          <span>
+            {t("max")} : {temperature.max}
+          </span>
         </div>
       </div>
 
@@ -113,6 +139,7 @@ function App() {
         {locel == "ar" ? "English" : "عربي"}
       </button>
     </div>
+    // JSX End
   );
 }
 
