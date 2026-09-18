@@ -15,7 +15,17 @@ import "dayjs/locale/ar";
 import "dayjs/locale/en";
 // Libraris End
 
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { apiFeatch } from "./features/api/apiSlice";
+
 function App() {
+  const api = useSelector((state) => {
+    return state.result;
+  });
+
+  const dispatch = useDispatch();
+
   // UseState Start
   const [locel, setlocal] = useState("ar");
 
@@ -39,8 +49,6 @@ function App() {
   }, [locel]);
 
   useEffect(() => {
-    
-    
     const control = new AbortController();
     axios
       .get(
@@ -59,6 +67,9 @@ function App() {
         });
       })
       .catch((error) => {
+        if (axios.isCancel(error)) {
+          return;
+        }
         console.error(error);
       });
 
