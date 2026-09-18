@@ -39,8 +39,9 @@ function App() {
   }, [locel]);
 
   useEffect(() => {
+    
+    
     const control = new AbortController();
-
     axios
       .get(
         "https://api.openweathermap.org/data/2.5/weather?lat=30.0333&lon=31.2333&appid=bdc36c23828ca70eafb1a14accb000e7&units=metric",
@@ -102,7 +103,7 @@ function App() {
               <img src={temperature.icon} alt="" />
             </div>
             <span className="text-gray-100 text-xl font-bold mt-3">
-              {temperature.description}
+              {t(temperature.description)}
             </span>
           </div>
 

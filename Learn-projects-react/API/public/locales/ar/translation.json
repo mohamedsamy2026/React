@@ -1,5 +1,21 @@
 {
-    "cairo":"القاهره",
-    "min": "الصغري",
-    "max": "الكبري"
+  "cairo": "القاهره",
+  "min": "الصغري",
+  "max": "الكبري",
+  "clear sky": "جو صافٍ",
+  "few clouds": "سحب قليلة",
+  "scattered clouds": "سحب متفرقة",
+  "broken clouds": "سحب غائمة جزئياً",
+  "overcast clouds": "سحب غائمة كلياً",
+  "clouds": "غيوم",
+  "light rain": "مطر خفيف",
+  "moderate rain": "مطر متوسط",
+  "heavy intensity rain": "مطر غزير",
+  "rain": "مطر",
+  "thunderstorm": "عاصفة رعدية",
+  "snow": "ثلوج",
+  "mist": "ضباب خفيف",
+  "fog": "ضباب",
+  "haze": "عوالق ترابية / شبورة",
+  "dust": "أتربة"
 }
