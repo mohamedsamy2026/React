@@ -4,12 +4,11 @@ import "./App.css";
 import { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { add } from "./features/add/addSlice";
+import { add, minuns, portion, hit } from "./features/add/addSlice";
 
 function App() {
   const [firstNumberInput, setFirstNumberInput] = useState(null);
   const [secondNumberInput, setSecondNumberInput] = useState(null);
-  const [result, setResult] = useState(null);
 
   const count = useSelector((state) => {
     return state.add.result;
@@ -22,18 +21,30 @@ function App() {
   }
 
   function handleSubClick() {
-    const res = Number(firstNumberInput) - Number(secondNumberInput);
-    setResult(res);
+    dispatch(
+      minuns({
+        first: firstNumberInput,
+        last: secondNumberInput,
+      }),
+    );
   }
 
   function handleMultClick() {
-    const res = Number(firstNumberInput) * Number(secondNumberInput);
-    setResult(res);
+    dispatch(
+      hit({
+        first: firstNumberInput,
+        last: secondNumberInput,
+      }),
+    );
   }
 
   function handleDivClick() {
-    const res = Number(firstNumberInput) / Number(secondNumberInput);
-    setResult(res);
+    dispatch(
+      portion({
+        first: firstNumberInput,
+        last: secondNumberInput,
+      }),
+    );
   }
 
   return (
@@ -89,11 +100,6 @@ function App() {
           <button onClick={handleDivClick}>divide</button>
         </div>
 
-        {result !== null && (
-          <h2 style={{ color: "white", marginTop: "15px" }}>
-            Result: {result}
-          </h2>
-        )}
 
         <h2 style={{ color: "white", marginTop: "15px" }}>
           Result Redux: {count}
