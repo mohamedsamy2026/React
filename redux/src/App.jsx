@@ -1,15 +1,24 @@
 import "./App.css";
+
+// HOOKS
 import { useState } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { add } from "./features/add/addSlice";
 
 function App() {
   const [firstNumberInput, setFirstNumberInput] = useState(null);
   const [secondNumberInput, setSecondNumberInput] = useState(null);
   const [result, setResult] = useState(null);
 
+  const count = useSelector((state) => {
+    return state.add.result;
+  });
+  const dispatch = useDispatch();
+
   // EVENT HANDLERS
   function handleSumClick() {
-    const res = Number(firstNumberInput) + Number(secondNumberInput);
-    setResult(res);
+    dispatch(add({ frist: firstNumberInput, last: secondNumberInput }));
   }
 
   function handleSubClick() {
@@ -85,6 +94,10 @@ function App() {
             Result: {result}
           </h2>
         )}
+
+        <h2 style={{ color: "white", marginTop: "15px" }}>
+          Result Redux: {count}
+        </h2>
       </div>
     </div>
   );
