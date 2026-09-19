@@ -1,166 +1,133 @@
-  // App CSS Start
-  import "./App.css";
-  // App CSS End
+// App CSS Start
+import "./App.css";
+// App CSS End
 
-  // Hooks Start
-  import { useEffect } from "react";
-  import { useState } from "react";
-  // Hooks End
+// Hooks Start
+import { useEffect } from "react";
+import { useState } from "react";
+// Hooks End
 
-  // Libraris Start
-  import axios from "axios";
-  import { useTranslation } from "react-i18next";
-  import dayjs from "dayjs";
-  import "dayjs/locale/ar";
-  import "dayjs/locale/en";
+// Libraris Start
+import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
+import "dayjs/locale/ar";
+import "dayjs/locale/en";
 
-  import CircularProgress from "@mui/material/CircularProgress";
-  import Box from "@mui/material/Box";
-  // Libraris End
+import CircularProgress from "@mui/material/CircularProgress";
+// Libraris End
 
-  // Redux
-  import { useSelector, useDispatch } from "react-redux";
-  import { apiFeatch, fetchWeather } from "./features/api/apiSlice";
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { fetchWeather } from "./features/api/apiSlice";
 
-  function App() {
-    const api = useSelector((state) => {
-      return state.result;
-    });
-    const isLoader = useSelector((state) => {
-      return state.apiFeatch.isLoader;
-    });
+function App() {
 
-    const dispatch = useDispatch();
+  const isLoader = useSelector((state) => {
+    return state.apiFeatch.isLoader;
+  });
 
-    // UseState Start
-    const [locel, setlocal] = useState("ar");
+  const temperature = useSelector((state) => {
+    return state.apiFeatch.weather;
+  });
 
-    const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
 
-    const [time, setTime] = useState("");
+  // UseState Start
+  const [locel, setlocal] = useState("ar");
 
-    const [temperature, setTemperature] = useState({
-      temp: null,
-      min: null,
-      max: null,
-      description: "",
-      icon: null,
-    });
-    // UseState End
+  const { t, i18n } = useTranslation();
 
-    // UseEffect Start
-    useEffect(() => {
-      dayjs.locale(locel);
-      setTime(dayjs().format("D-M-YYYY MMMM"));
-    }, [locel]);
+  const [time, setTime] = useState("");
 
-    useEffect(() => {
-      dispatch(fetchWeather());
-      const control = new AbortController();
-      axios
-        .get(
-          "https://api.openweathermap.org/data/2.5/weather?lat=30.0333&lon=31.2333&appid=bdc36c23828ca70eafb1a14accb000e7&units=metric",
-          {
-            signal: control.signal,
-          },
-        )
-        .then((response) => {
-          setTemperature({
-            temp: Math.round(response.data.main.temp),
-            min: Math.round(response.data.main.temp_min),
-            max: Math.round(response.data.main.temp_max),
-            description: response.data.weather[0].description,
-            icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-          });
-        })
-        .catch((error) => {
-          if (axios.isCancel(error)) {
-            return;
-          }
-          console.error(error);
-        });
+  // UseState End
 
-      return () => {
-        control.abort();
-      };
-    }, []);
-    // UseEffect End
+  // UseEffect Start
+  useEffect(() => {
+    dispatch(fetchWeather());
 
-    // Functions Start
-    function handleLanguche() {
-      const nextLang = locel === "ar" ? "en" : "ar";
-      i18n.changeLanguage(nextLang);
-      setlocal(nextLang);
-    }
-    // Functions End
+    dayjs.locale(locel);
 
-    // Languche Start
-    const dir = locel == "ar" ? "rtl" : "ltr";
-    // Languche End
+    setTime(dayjs().format("D-M-YYYY MMMM"));
+    
+  }, [locel]);
 
-    return (
-      // JSX Start
-      <div
-        className="bg-[#1e5ee5] h-screen flex justify-center items-center flex-col w-full"
-        dir={dir}
-      >
-        <div className="bg-[#1b4db1] w-[500px] rounded-2xl p-6 text-white shadow-xl flex flex-col justify-between">
-          {/* Heaher Start */}
-          <div className="flex justify-between items-center pb-4 border-b border-blue-400/30 ">
-            <h2 className="text-5xl font-bold">{t("cairo")}</h2>
-            <h4 className="text-lg font-bold text-gray-200">{time}</h4>
-          </div>
-          {/* Heaher End */}
+  // UseEffect End
 
-          {/* Context start */}
-          <div className="flex justify-between items-center my-8">
-            {/* درجة الحرارة وحالة الجو */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-2">
-                {isLoader ? <CircularProgress style={{color:"white"}}  /> : ""}
-                <span className="text-8xl font-light">{temperature.temp}</span>
-                <img src={temperature.icon} alt="" />
-              </div>
-              <span className="text-gray-100 text-xl font-bold mt-3">
-                {t(temperature.description)}
-              </span>
+  // Functions Start
+  function handleLanguche() {
+    const nextLang = locel === "ar" ? "en" : "ar";
+    i18n.changeLanguage(nextLang);
+    setlocal(nextLang);
+  }
+  // Functions End
+
+  // Languche Start
+  const dir = locel == "ar" ? "rtl" : "ltr";
+  // Languche End
+
+  return (
+    // JSX Start
+    <div
+      className="bg-[#1e5ee5] h-screen flex justify-center items-center flex-col w-full"
+      dir={dir}
+    >
+      <div className="bg-[#1b4db1] w-[500px] rounded-2xl p-6 text-white shadow-xl flex flex-col justify-between">
+        {/* Heaher Start */}
+        <div className="flex justify-between items-center pb-4 border-b border-blue-400/30 ">
+          <h2 className="text-5xl font-bold">{t("cairo")}</h2>
+          <h4 className="text-lg font-bold text-gray-200">{time}</h4>
+        </div>
+        {/* Heaher End */}
+
+        {/* Context start */}
+        <div className="flex justify-between items-center my-8">
+          {/* درجة الحرارة وحالة الجو */}
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-2">
+              {isLoader ? <CircularProgress style={{ color: "white" }} /> : ""}
+              <span className="text-8xl font-light">{temperature.temp}</span>
+              <img src={temperature.icon} alt="" />
             </div>
-
-            {/* أيقونة السحابة الكبيرة */}
-            <div className="flex items-center cursor-pointer hover:scale-110 duration-300">
-              <svg
-                className="w-32 h-32 text-white fill-current drop-shadow-md"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z" />
-              </svg>
-            </div>
+            <span className="text-gray-100 text-xl font-bold mt-3">
+              {t(temperature.description)}
+            </span>
           </div>
-          {/* Context End */}
 
-          {/* الجزء السفلي: الصغرى والكبرى */}
-          <div className="flex justify-start gap-x-3 text-md text-white pt-2">
-            <span>
-              {t("min")}: {temperature.min}
-            </span>
-            <span> | </span>
-            <span>
-              {t("max")} : {temperature.max}
-            </span>
+          {/* أيقونة السحابة الكبيرة */}
+          <div className="flex items-center cursor-pointer hover:scale-110 duration-300">
+            <svg
+              className="w-32 h-32 text-white fill-current drop-shadow-md"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z" />
+            </svg>
           </div>
         </div>
+        {/* Context End */}
 
-        {/* زر اللغة في الزاوية */}
-        <button
-          className="text-xl font-bold text-white text-2xl cursor-pointer mt-4 py-3 px-5 rounded-lg  duration-400 w-[27%] text-end"
-          onClick={handleLanguche}
-          dir={dir}
-        >
-          {locel == "ar" ? "English" : "عربي"}
-        </button>
+        {/* الجزء السفلي: الصغرى والكبرى */}
+        <div className="flex justify-start gap-x-3 text-md text-white pt-2">
+          <span>
+            {t("min")}: {temperature.min}
+          </span>
+          <span> | </span>
+          <span>
+            {t("max")} : {temperature.max}
+          </span>
+        </div>
       </div>
-      // JSX End
-    );
-  }
 
-  export default App;
+      {/* زر اللغة في الزاوية */}
+      <button
+        className="text-xl font-bold text-white text-2xl cursor-pointer mt-4 py-3 px-5 rounded-lg  duration-400 w-[27%] text-end"
+        onClick={handleLanguche}
+        dir={dir}
+      >
+        {locel == "ar" ? "English" : "عربي"}
+      </button>
+    </div>
+    // JSX End
+  );
+}
+
+export default App;
