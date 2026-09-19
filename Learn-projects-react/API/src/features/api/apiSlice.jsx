@@ -39,6 +39,5 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { apiFeatch } = counterSlice.actions;
 
 export default counterSlice.reducer;
