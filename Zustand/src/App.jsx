@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <h1 className="text-2xl text-center bg-blue-500 py-3 px-4 text-white font-bold">
-        Learn ZusTand
+        Learn ZusTand 
       </h1>
     </>
   );
